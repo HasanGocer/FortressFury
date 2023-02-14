@@ -32,9 +32,10 @@ public class MarketSystem : MonoSingleton<MarketSystem>
     [SerializeField] private GameObject _marketOpenPos, _marketClosePos;
     [SerializeField] GameObject _upImage, _downImage;
     public RectTransform marketPanel;
+    [SerializeField] GameObject _marketScrollPanel;
     [SerializeField] float _panelLerpMinDistance;
     [SerializeField] int _panelLerpFactor;
-    bool isOpen = true;
+    public bool isOpen = false;
 
     public void MarketStart()
     {
@@ -45,26 +46,36 @@ public class MarketSystem : MonoSingleton<MarketSystem>
 
     public void GameStart()
     {
+        _marketScrollPanel.SetActive(true);
         marketPanel.gameObject.SetActive(true);
+    }
+
+    public void GameFinish()
+    {
+        _marketScrollPanel.SetActive(false);
+        marketPanel.gameObject.SetActive(false);
+    }
+
+    public void MarketPanelOff()
+    {
+        _downImage.SetActive(false);
+        _upImage.SetActive(true);
+        StartCoroutine(MarketPanelMove());
     }
 
     private void MarketButton()
     {
-        if (isOpen)
+        if (!isOpen)
         {
-            Buttons.Instance.startPanel.SetActive(false);
+            Buttons.Instance.SettingPanelOff();
             _downImage.SetActive(true);
             _upImage.SetActive(false);
-            isOpen = false;
             StartCoroutine(MarketPanelMove());
         }
         else
         {
-            if (GameManager.Instance.gameStat == GameManager.GameStat.intro)
-                Buttons.Instance.startPanel.SetActive(true);
             _downImage.SetActive(false);
             _upImage.SetActive(true);
-            isOpen = true;
             StartCoroutine(MarketPanelMove());
         }
     }
@@ -89,6 +100,7 @@ public class MarketSystem : MonoSingleton<MarketSystem>
                 yield return new WaitForSeconds(Time.deltaTime);
                 if (_panelLerpMinDistance >= Vector2.Distance(marketPanel.position, tempPos.transform.position)) break;
             }
+            isOpen = false;
         }
         else
         {
@@ -100,6 +112,7 @@ public class MarketSystem : MonoSingleton<MarketSystem>
                 yield return new WaitForSeconds(Time.deltaTime);
                 if (_panelLerpMinDistance >= Vector2.Distance(marketPanel.position, tempPos.transform.position)) break;
             }
+            isOpen = true;
         }
 
 

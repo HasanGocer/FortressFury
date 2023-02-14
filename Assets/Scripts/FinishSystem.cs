@@ -12,7 +12,7 @@ public class FinishSystem : MonoSingleton<FinishSystem>
     public void FinishCheck()
     {
         deadWalkerCount++;
-        if (deadWalkerCount >= MyDoPath.Instance.walkerCount && GameManager.Instance.gameStat == GameManager.GameStat.start)
+        if (deadWalkerCount >= WalkerManager.Instance.walkerCount && GameManager.Instance.gameStat == GameManager.GameStat.start)
             FinishTime();
     }
     public void FinishTime()
@@ -24,8 +24,7 @@ public class FinishSystem : MonoSingleton<FinishSystem>
             StartCoroutine(BarSystem.Instance.BarImageFillAmountIenum());
         else
             buttons.NotBossFinal();
-        SoundSystem.Instance.CallFinishSound();
-            Buttons.Instance.SettingPanelOff();
+        Buttons.Instance.SettingPanelOff();
         MarketSystem.Instance.GameFinish();
         LevelManager.Instance.LevelCheck();
         buttons.winPanel.SetActive(true);

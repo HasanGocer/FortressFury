@@ -3,23 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainBar : MonoSingleton<MainBar>
+public class CharacterBar : MonoBehaviour
 {
-    [Header("Castle_Bar_Field")]
+    [Header("Walker_Bar_Field")]
     [Space(10)]
 
-    [SerializeField] private Image _bar;
-    [SerializeField] private GameObject mainBar;
+    [SerializeField] GameObject _barPanel;
     GameObject mainCamera;
+    [SerializeField] private Image _bar;
+    [SerializeField] WalkerID walkerID;
 
-    public void MainBarStart()
+    public void StartCameraLook()
     {
-        if (GameManager.Instance.level % WalkerManager.Instance.bossModLevel != 0)
-        {
-            mainCamera = Camera.main.gameObject;
-            mainBar.SetActive(true);
-            StartCoroutine(LookCamera());
-        }
+        mainCamera = Camera.main.gameObject;
+        StartCoroutine(LookCamera());
     }
 
     public void BarUpdate(int max, int count, int down)
@@ -27,8 +24,11 @@ public class MainBar : MonoSingleton<MainBar>
         float nowBar = (float)count / (float)max;
         float afterBar = ((float)count - (float)down) / (float)max;
         if (afterBar < 0) afterBar = 0;
-        MainManager.Instance.mainHealth -= ItemData.Instance.field.walkerCastleHitPower;
         StartCoroutine(BarUpdateIenumurator(nowBar, afterBar));
+    }
+    public void BarRestart()
+    {
+        _bar.fillAmount = 1;
     }
 
     private IEnumerator LookCamera()
@@ -37,7 +37,7 @@ public class MainBar : MonoSingleton<MainBar>
         {
             if (GameManager.Instance.gameStat == GameManager.GameStat.start)
             {
-                mainBar.transform.LookAt(mainCamera.transform);
+                _barPanel.transform.LookAt(mainCamera.transform);
                 yield return new WaitForSeconds(Time.deltaTime);
             }
             yield return null;
@@ -60,15 +60,20 @@ public class MainBar : MonoSingleton<MainBar>
             if (_bar.fillAmount <= finish) break;
         }
     }
-
     private void FinishGame()
     {
-        if (GameManager.Instance.gameStat == GameManager.GameStat.start)
+        WalkerManager walkerManager = WalkerManager.Instance;
+
+        if (walkerID.isLive)
         {
-            Buttons.Instance.SettingPanelOff();
-            MarketSystem.Instance.GameFinish();
-            GameManager.Instance.gameStat = GameManager.GameStat.finish;
-            Buttons.Instance.failPanel.SetActive(true);
+            walkerID.isLive = false;
+            int money = Random.Range(walkerManager.minPrice, walkerManager.maxPrice);
+            CoinSpawn.Instance.Spawn(gameObject);
+            MoneySystem.Instance.MoneyTextRevork(money);
+            PointText.Instance.CallPointText(gameObject, money, PointText.PointType.yellowHit);
+            FinishSystem.Instance.FinishCheck();
+            Vibration.Vibrate(30);
+            walkerManager.RemoveWalker(gameObject);
         }
     }
 }

@@ -16,11 +16,10 @@ public class GunFire : MonoSingleton<GunFire>
 
     public IEnumerator GunFireStart()
     {
-        RunnerManager runnerManager = RunnerManager.Instance;
+        WalkerManager walkerManager = WalkerManager.Instance;
         GameManager gameManager = GameManager.Instance;
         ItemData itemData = ItemData.Instance;
         MainManager mainManager = MainManager.Instance;
-        BossManager bossManager = BossManager.Instance;
 
         bool isRivalSee = false;
         int tempRivalCount = -1;
@@ -33,12 +32,12 @@ public class GunFire : MonoSingleton<GunFire>
             yield return null;
             if (gameManager.level % WalkerManager.Instance.bossModLevel != 0)
             {
-                if (runnerManager.Walker.Count > 0)
-                    for (int i = 0; i < runnerManager.Walker.Count; i++)
-                        if (itemData.field.gunDistance > Vector3.Distance(runnerManager.Walker[i].transform.position, mainManager.GunIDs[mainManager.gunCount].mainCharacter.transform.position))
+                if (walkerManager.Walker.Count > 0)
+                    for (int i = 0; i < walkerManager.Walker.Count; i++)
+                        if (itemData.field.gunDistance > Vector3.Distance(walkerManager.Walker[i].transform.position, mainManager.GunIDs[mainManager.gunCount].mainCharacter.transform.position))
                             if (isRivalSee)
                             {
-                                if (Vector3.Distance(runnerManager.Walker[tempRivalCount].transform.position, mainManager.GunIDs[mainManager.gunCount].mainCharacter.transform.position) > Vector3.Distance(runnerManager.Walker[i].transform.position, mainManager.GunIDs[mainManager.gunCount].mainCharacter.transform.position))
+                                if (Vector3.Distance(walkerManager.Walker[tempRivalCount].transform.position, mainManager.GunIDs[mainManager.gunCount].mainCharacter.transform.position) > Vector3.Distance(walkerManager.Walker[i].transform.position, mainManager.GunIDs[mainManager.gunCount].mainCharacter.transform.position))
                                     RivalSeeTrue(ref isRivalSee, ref tempRivalCount, i);
                             }
                             else
@@ -46,18 +45,18 @@ public class GunFire : MonoSingleton<GunFire>
 
                 if (isRivalSee)
                 {
-                    HitRival(runnerManager.Walker[tempRivalCount], mainManager, itemData);
+                    HitRival(walkerManager.Walker[tempRivalCount], mainManager, itemData);
                     yield return new WaitForSeconds(itemData.field.gunReloadTime);
                     RivalSeeFalse(ref isRivalSee, ref tempRivalCount);
                 }
             }
             else
             {
-                if (bossManager.boss != null)
+               /* if (bossManager.boss != null)
                 {
                     HitRival(bossManager.boss, mainManager, itemData);
                     yield return new WaitForSeconds(itemData.field.gunReloadTime);
-                }
+                }*/
             }
         }
     }
@@ -94,8 +93,6 @@ public class GunFire : MonoSingleton<GunFire>
     }
     private void GunEffect(GameObject pos, GameObject target)
     {
-        SoundSystem.Instance.CallHitSound();
-        ParticalSystem.Instance.CallHitPartical(pos, target);
     }
     private void GunLookFocusRival(GameObject focusRival, MainManager mainManager)
     {

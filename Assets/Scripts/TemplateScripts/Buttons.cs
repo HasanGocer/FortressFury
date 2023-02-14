@@ -38,7 +38,6 @@ public class Buttons : MonoSingleton<Buttons>
     public GameObject barPanel;
     [SerializeField] private Button _winPrizeButton, _winEmptyButton, _failButton;
     [SerializeField] int finishWaitTime;
-    [SerializeField] int bossModLevel;
 
     public TMP_Text finishGameMoneyText;
 
@@ -48,6 +47,7 @@ public class Buttons : MonoSingleton<Buttons>
     [SerializeField] GameObject _loadingPanel;
     [SerializeField] int _loadingScreenCountdownTime;
     [SerializeField] int _startSceneCount;
+    [SerializeField] int _sceneCount;
 
     private void Start()
     {
@@ -58,6 +58,7 @@ public class Buttons : MonoSingleton<Buttons>
 
     public IEnumerator LoadingScreen()
     {
+        MainManager mainManager = MainManager.Instance;
 
         _loadingPanel.SetActive(true);
         _globalPanel.SetActive(false);
@@ -68,12 +69,19 @@ public class Buttons : MonoSingleton<Buttons>
         startPanel.SetActive(true);
 
         MarketSystem.Instance.MarketStart();
+        mainManager.StartMainManager();
+        mainManager.GunStartPlacement();
     }
     public IEnumerator NoThanxOnActive()
     {
         _winEmptyButton.gameObject.SetActive(false);
         yield return new WaitForSeconds(3);
         _winEmptyButton.gameObject.SetActive(true);
+    }
+
+    public void SettingPanelOff()
+    {
+        SettingBackButton();
     }
 
     private void SettingPlacement()
@@ -116,6 +124,10 @@ public class Buttons : MonoSingleton<Buttons>
         GameManager.Instance.gameStat = GameManager.GameStat.start;
         startPanel.SetActive(false);
 
+        StartCoroutine(GunFire.Instance.GunFireStart());
+        MainBar.Instance.MainBarStart();
+        MarketSystem.Instance.GameStart();
+        WalkerManager.Instance.FirstSpawn();
     }
     private IEnumerator WinButton()
     {
@@ -123,37 +135,54 @@ public class Buttons : MonoSingleton<Buttons>
 
         _winPrizeButton.enabled = false;
         gameManager.SetLevel();
-        if (gameManager.level % bossModLevel == 0)
+        if (gameManager.level % WalkerManager.Instance.bossModLevel == 0)
         {
             BarSystem.Instance.BarStopButton(0);
             MoneySystem.Instance.MoneyTextRevork(gameManager.addedMoney);
         }
         yield return new WaitForSeconds(finishWaitTime);
-        SceneManager.LoadScene(_startSceneCount);
+
+        int templevel = gameManager.level;
+
+        gameManager.SetLevel();
+
+        SceneManager.LoadScene((templevel % _sceneCount) + _startSceneCount);
     }
     private IEnumerator WinPrizeButton()
     {
         GameManager gameManager = GameManager.Instance;
 
         _winPrizeButton.enabled = false;
-        if (gameManager.level % bossModLevel == 0)
+        if (gameManager.level % WalkerManager.Instance.bossModLevel == 0)
             BarSystem.Instance.BarStopButton(gameManager.addedMoney);
-        gameManager.SetLevel();
         yield return new WaitForSeconds(finishWaitTime);
-        SceneManager.LoadScene(_startSceneCount);
+
+        int templevel = gameManager.level / 10;
+
+        gameManager.SetLevel();
+
+        SceneManager.LoadScene((templevel % _sceneCount) + _startSceneCount);
     }
     private IEnumerator FailButton()
     {
         MoneySystem.Instance.MoneyTextRevork(GameManager.Instance.addedMoney);
         yield return new WaitForSeconds(finishWaitTime);
-        SceneManager.LoadScene(_startSceneCount);
+
+        int templevel = GameManager.Instance.level / 10;
+
+        SceneManager.LoadScene((templevel % _sceneCount) + _startSceneCount);
     }
     private void SettingButton()
     {
-        startPanel.SetActive(false);
-        _settingGame.SetActive(true);
-        _settingButton.gameObject.SetActive(false);
-        _globalPanel.SetActive(false);
+        if (GameManager.Instance.gameStat != GameManager.GameStat.finish)
+        {
+            if (MarketSystem.Instance.isOpen)
+                MarketSystem.Instance.MarketPanelOff();
+            startPanel.SetActive(false);
+            _settingGame.SetActive(true);
+            _settingButton.gameObject.SetActive(false);
+            _globalPanel.SetActive(false);
+        }
     }
     private void SettingBackButton()
     {
@@ -199,5 +228,8 @@ public class Buttons : MonoSingleton<Buttons>
 
         gameManager.SetVibration();
     }
-
+    public void NotBossFinal()
+    {
+        _winPrizeButton.transform.GetChild(1).GetComponent<TMPro.TMP_Text>().text = "Next";
+    }
 }

@@ -9,7 +9,6 @@ public class WalkerID : MonoBehaviour
 
     public int ID;
     public bool isLive = true;
-    public int pathSelection;
     public int healthCount;
     public GameObject hitPos;
     public CapsuleCollider capsuleCollider;
