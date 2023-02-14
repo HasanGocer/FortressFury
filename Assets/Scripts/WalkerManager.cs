@@ -78,7 +78,7 @@ public class WalkerManager : MonoSingleton<WalkerManager>
     }
     private IEnumerator WalkPart(GameObject walker, GameObject pos, float factor, WalkerID walkerID, float maxWalkerDisance)
     {
-        while (walkerID.isLive && GameManager.Instance.gameStat == GameManager.GameStat.start)
+        while (walkerID.isLive && GameManager.Instance.gameStat == GameManager.GameStat.start && walker.activeInHierarchy)
         {
             Vector3 direction = (pos.transform.position - walker.transform.position).normalized;
             walker.transform.position += direction * factor * Time.deltaTime;

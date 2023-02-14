@@ -14,7 +14,7 @@ public class WalkerTouch : MonoBehaviour
             ItemData itemData = ItemData.Instance;
 
             HealtDown(itemData);
-            PointText.Instance.CallPointText(gameObject, itemData.field.gunAtackPower, PointText.PointType.RedHit);
+            PointText.Instance.CallDamageText(gameObject, itemData.field.gunAtackPower);
             walkerID.CharacterBar.BarUpdate(itemData.field.walkerHealth, walkerID.healthCount, itemData.field.gunAtackPower);
         }
         if (other.CompareTag("Castle") && walkerID.isLive)
@@ -26,7 +26,7 @@ public class WalkerTouch : MonoBehaviour
 
             FinishSystem.Instance.FinishCheck();
             MainBar.Instance.BarUpdate(itemData.field.castleHealth, MainManager.Instance.mainHealth, itemData.field.walkerCastleHitPower);
-            PointText.Instance.CallPointText(gameObject, itemData.field.walkerCastleHitPower, PointText.PointType.RedHit);
+            PointText.Instance.CallDamageText(gameObject, itemData.field.walkerCastleHitPower);
             WalkerManager.Instance.RemoveWalker(gameObject);
         }
     }

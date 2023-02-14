@@ -6,38 +6,39 @@ using DG.Tweening;
 
 public class PointText : MonoSingleton<PointText>
 {
-    public enum PointType
-    {
-        RedHit = 0,
-        GreenHit = 1,
-        yellowHit = 2
-    }
-
     [Header("Text_Field")]
     [Space(10)]
 
-    [SerializeField] private int _OPMoneyInt;
+    [SerializeField] private int _OPDamageTextCount;
+    [SerializeField] private int _OPCoinTextCount;
     [SerializeField] private float _textMoveTime;
-    [SerializeField] private float _moneyJumpDistance;
-    [SerializeField] Ease _moveEaseType = Ease.InOutBounce;
 
-    public void CallPointText(GameObject Pos, int count, PointType pointType)
+    public void CallDamageText(GameObject Pos, int count)
     {
-        StartCoroutine(CallPointMoneyText(Pos, count, pointType));
+        StartCoroutine(CallPointDamageText(Pos, count));
     }
 
-    private IEnumerator CallPointMoneyText(GameObject Pos, int count, PointType pointType)
+    public void CallCoinText(GameObject Pos, int count)
     {
-        GameObject obj = ObjectPool.Instance.GetPooledObject(_OPMoneyInt);
+        StartCoroutine(CallPointCoinText(Pos, count));
+    }
 
-        if (pointType == PointType.GreenHit) obj.GetComponent<TMP_Text>().color = Color.green;
-        if (pointType == PointType.RedHit) obj.GetComponent<TMP_Text>().color = Color.red;
-        if (pointType == PointType.yellowHit) obj.GetComponent<TMP_Text>().color = Color.yellow;
+    private IEnumerator CallPointDamageText(GameObject Pos, int count)
+    {
+        GameObject obj = ObjectPool.Instance.GetPooledObject(_OPDamageTextCount);
 
         obj.GetComponent<TMP_Text>().text = count.ToString();
         obj.transform.position = Pos.transform.position;
-        obj.transform.DOMove(new Vector3(Pos.transform.position.x, Pos.transform.position.y + _moneyJumpDistance, Pos.transform.position.z), _textMoveTime).SetEase(_moveEaseType);
         yield return new WaitForSeconds(_textMoveTime);
-        ObjectPool.Instance.AddObject(_OPMoneyInt, obj);
+        ObjectPool.Instance.AddObject(_OPDamageTextCount, obj);
+    }
+    private IEnumerator CallPointCoinText(GameObject Pos, int count)
+    {
+        GameObject obj = ObjectPool.Instance.GetPooledObject(_OPCoinTextCount);
+
+        obj.GetComponent<TMP_Text>().text = count.ToString();
+        obj.transform.position = Pos.transform.position;
+        yield return new WaitForSeconds(_textMoveTime);
+        ObjectPool.Instance.AddObject(_OPCoinTextCount, obj);
     }
 }
