@@ -8,5 +8,5 @@ public class GunID : MonoBehaviour
     [Space(10)]
 
     public GameObject mainCharacter;
-    public GameObject hitStartPos;
+    public List<GameObject> hitStartPos;
 }

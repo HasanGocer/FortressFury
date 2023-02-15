@@ -45,18 +45,19 @@ public class GunFire : MonoSingleton<GunFire>
 
                 if (isRivalSee)
                 {
-                    HitRival(walkerManager.Walker[tempRivalCount], mainManager, itemData);
+                    foreach (GameObject pos in mainManager.GunIDs[mainManager.gunCount].hitStartPos)
+                        HitRival(walkerManager.Walker[tempRivalCount], pos, mainManager, itemData);
                     yield return new WaitForSeconds(itemData.field.gunReloadTime);
                     RivalSeeFalse(ref isRivalSee, ref tempRivalCount);
                 }
             }
             else
             {
-               /* if (bossManager.boss != null)
-                {
-                    HitRival(bossManager.boss, mainManager, itemData);
-                    yield return new WaitForSeconds(itemData.field.gunReloadTime);
-                }*/
+                /* if (bossManager.boss != null)
+                 {
+                     HitRival(bossManager.boss, mainManager, itemData);
+                     yield return new WaitForSeconds(itemData.field.gunReloadTime);
+                 }*/
             }
         }
     }
@@ -71,12 +72,12 @@ public class GunFire : MonoSingleton<GunFire>
         isRivalSee = false;
         tempRivalCount = -1;
     }
-    private void HitRival(GameObject focusRival, MainManager mainManager, ItemData itemData)
+    private void HitRival(GameObject focusRival, GameObject pos, MainManager mainManager, ItemData itemData)
     {
         if (focusRival.activeInHierarchy)
         {
             GameObject hit = GetObject();
-            HitPlacement(ref hit, mainManager);
+            HitPlacement(ref hit, pos);
             GunEffect(hit, focusRival);
             GunLookFocusRival(focusRival, mainManager);
             GunShake(mainManager, itemData);
@@ -87,9 +88,9 @@ public class GunFire : MonoSingleton<GunFire>
     {
         return ObjectPool.Instance.GetPooledObject(OPHitCount);
     }
-    private void HitPlacement(ref GameObject hit, MainManager mainManager)
+    private void HitPlacement(ref GameObject hit, GameObject pos)
     {
-        hit.transform.position = mainManager.GunIDs[mainManager.gunCount].hitStartPos.transform.position;
+        hit.transform.position = pos.transform.position;
     }
     private void GunEffect(GameObject pos, GameObject target)
     {
@@ -101,7 +102,7 @@ public class GunFire : MonoSingleton<GunFire>
     }
     private void GunShake(MainManager mainManager, ItemData itemData)
     {
-        mainManager.GunIDs[mainManager.gunCount].hitStartPos.transform.DOShakeScale(itemData.field.gunReloadTime, _gunScalePower);
+        mainManager.Guns[mainManager.gunCount].transform.DOShakeScale(itemData.field.gunReloadTime, _gunScalePower);
     }
     private IEnumerator HitMove(GameObject hit, GameObject pos)
     {

@@ -47,7 +47,6 @@ public class Buttons : MonoSingleton<Buttons>
     [SerializeField] GameObject _loadingPanel;
     [SerializeField] int _loadingScreenCountdownTime;
     [SerializeField] int _startSceneCount;
-    [SerializeField] int _sceneCount;
 
     private void Start()
     {
@@ -124,10 +123,7 @@ public class Buttons : MonoSingleton<Buttons>
         GameManager.Instance.gameStat = GameManager.GameStat.start;
         startPanel.SetActive(false);
 
-        StartCoroutine(GunFire.Instance.GunFireStart());
-        MainBar.Instance.MainBarStart();
-        MarketSystem.Instance.GameStart();
-        WalkerManager.Instance.FirstSpawn();
+        StartCoroutine(PortalSystem.Instance.PortalOpen());
     }
     private IEnumerator WinButton()
     {
@@ -146,7 +142,7 @@ public class Buttons : MonoSingleton<Buttons>
 
         gameManager.SetLevel();
 
-        SceneManager.LoadScene((templevel % _sceneCount) + _startSceneCount);
+        SceneManager.LoadScene(_startSceneCount);
     }
     private IEnumerator WinPrizeButton()
     {
@@ -161,7 +157,7 @@ public class Buttons : MonoSingleton<Buttons>
 
         gameManager.SetLevel();
 
-        SceneManager.LoadScene((templevel % _sceneCount) + _startSceneCount);
+        SceneManager.LoadScene(_startSceneCount);
     }
     private IEnumerator FailButton()
     {
@@ -170,7 +166,7 @@ public class Buttons : MonoSingleton<Buttons>
 
         int templevel = GameManager.Instance.level / 10;
 
-        SceneManager.LoadScene((templevel % _sceneCount) + _startSceneCount);
+        SceneManager.LoadScene(_startSceneCount);
     }
     private void SettingButton()
     {
