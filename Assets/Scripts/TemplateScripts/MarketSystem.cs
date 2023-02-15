@@ -37,6 +37,7 @@ public class MarketSystem : MonoSingleton<MarketSystem>
     [SerializeField] int _panelLerpFactor;
     public bool isOpen = false;
     public int gun2, gun3;
+    [SerializeField] GameObject gun2GO, gun3GO;
 
     public void MarketStart()
     {
@@ -74,6 +75,11 @@ public class MarketSystem : MonoSingleton<MarketSystem>
             gun2 = 1;
         if (PlayerPrefs.HasKey("Gun3"))
             gun3 = 1;
+
+        if (gun2 == 1)
+            gun2GO.GetComponent<GunBuy>().GunOpen();
+        if (gun3 == 1)
+            gun3GO.GetComponent<GunBuy>().GunOpen();
     }
 
     public void GunBuy(int i)

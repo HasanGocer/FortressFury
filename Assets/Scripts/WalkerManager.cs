@@ -19,6 +19,7 @@ public class WalkerManager : MonoSingleton<WalkerManager>
     [SerializeField] float _spawnCoundownTime;
     [SerializeField] int _OPRunnerCount;
     [SerializeField] GameObject _walkerStartPos, _walkerFinishPos;
+    [SerializeField] float _spawnDistance;
 
     public void FirstSpawn()
     {
@@ -47,6 +48,7 @@ public class WalkerManager : MonoSingleton<WalkerManager>
             walkerCount += walkerCount + (levelModRunnerPlusCount * i1);
             for (int i2 = 0; i2 < walkerCount + (levelModRunnerPlusCount * i1); i2++)
             {
+                print(1);
                 GameObject obj = GetObject(i1);
                 WalkerID walkerID = obj.GetComponent<WalkerID>();
 
@@ -75,6 +77,7 @@ public class WalkerManager : MonoSingleton<WalkerManager>
     private void WalkerPlacement(ref GameObject walker, GameObject pos)
     {
         walker.transform.position = pos.transform.position;
+        walker.transform.position += new Vector3(Random.Range(-1 * _spawnDistance, _spawnDistance), 0, 0);
     }
     private IEnumerator WalkPart(GameObject walker, GameObject pos, float factor, WalkerID walkerID, float maxWalkerDisance)
     {

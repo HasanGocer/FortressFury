@@ -8,16 +8,25 @@ public class GunBuy : MonoBehaviour
     [SerializeField] int gunPrice;
     [SerializeField] GameObject gun;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnMouseDown()
+    {
+        GunPriceBuy();
+    }
+
+    public void GunOpen()
+    {
+        MarketSystem.Instance.GunBuy(gunCount);
+        gun.SetActive(true);
+        gameObject.SetActive(false);
+    }
+
+    public void GunPriceBuy()
     {
         GameManager gameManager = GameManager.Instance;
-
         if (gameManager.money >= gunPrice)
         {
             MoneySystem.Instance.MoneyTextRevork(-1 * gunPrice);
-            MarketSystem.Instance.GunBuy(gunCount);
-            gun.SetActive(true);
-            gameObject.SetActive(false);
+            GunOpen();
         }
     }
 }
