@@ -17,7 +17,12 @@ public class PortalSystem : MonoSingleton<PortalSystem>
         _portal.transform.DOScale(new Vector3(_PortalScale, _PortalScale, _PortalScale), _portalOpenTime);
         yield return new WaitForSeconds(_portalOpenTime);
 
-        StartCoroutine(GunFire.Instance.GunFireStart());
+
+        StartCoroutine(GunFire.Instance.GunFireStart(0));
+        if (MarketSystem.Instance.gun2 == 1)
+            StartCoroutine(GunFire.Instance.GunFireStart(1));
+        if (MarketSystem.Instance.gun3 == 1)
+            StartCoroutine(GunFire.Instance.GunFireStart(2));
         MainBar.Instance.MainBarStart();
         MarketSystem.Instance.GameStart();
         WalkerManager.Instance.FirstSpawn();

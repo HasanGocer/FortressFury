@@ -19,12 +19,12 @@ public class CharacterBar : MonoBehaviour
         StartCoroutine(LookCamera());
     }
 
-    public void BarUpdate(int max, int count, int down)
+    public void BarUpdate(int max, int count, int down, GameObject finishPos)
     {
         float nowBar = (float)count / (float)max;
         float afterBar = ((float)count - (float)down) / (float)max;
         if (afterBar < 0) afterBar = 0;
-        StartCoroutine(BarUpdateIenumurator(nowBar, afterBar));
+        StartCoroutine(BarUpdateIenumurator(nowBar, afterBar, finishPos));
     }
     public void BarRestart()
     {
@@ -43,7 +43,7 @@ public class CharacterBar : MonoBehaviour
             yield return null;
         }
     }
-    private IEnumerator BarUpdateIenumurator(float start, float finish)
+    private IEnumerator BarUpdateIenumurator(float start, float finish, GameObject finishPos)
     {
         yield return null;
         float temp = 0;
@@ -54,13 +54,13 @@ public class CharacterBar : MonoBehaviour
             yield return new WaitForEndOfFrame();
             if (_bar.fillAmount == 0)
             {
-                FinishGame();
+                FinishGame(finishPos);
                 break;
             }
             if (_bar.fillAmount <= finish) break;
         }
     }
-    private void FinishGame()
+    private void FinishGame(GameObject finishPos)
     {
         WalkerManager walkerManager = WalkerManager.Instance;
 
@@ -68,7 +68,7 @@ public class CharacterBar : MonoBehaviour
         {
             walkerID.isLive = false;
             int money = Random.Range(walkerManager.minPrice, walkerManager.maxPrice);
-            CoinSpawn.Instance.Spawn(gameObject);
+            CoinSpawn.Instance.Spawn(gameObject, finishPos);
             MoneySystem.Instance.MoneyTextRevork(money);
             PointText.Instance.CallCoinText(gameObject, money);
             FinishSystem.Instance.FinishCheck();

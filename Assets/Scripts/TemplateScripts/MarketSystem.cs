@@ -36,18 +36,23 @@ public class MarketSystem : MonoSingleton<MarketSystem>
     [SerializeField] float _panelLerpMinDistance;
     [SerializeField] int _panelLerpFactor;
     public bool isOpen = false;
+    public int gun2, gun3;
 
     public void MarketStart()
     {
         MarketOnOffPlacement();
         TextPlacement();
         MarketButtonPlacement();
+        PlayerPrefPlacement();
     }
 
     public void GameStart()
     {
-        _marketScrollPanel.SetActive(true);
-        marketPanel.gameObject.SetActive(true);
+        if (gun2 == 1 && gun3 == 1)
+        {
+            _marketScrollPanel.SetActive(true);
+            marketPanel.gameObject.SetActive(true);
+        }
     }
 
     public void GameFinish()
@@ -61,6 +66,31 @@ public class MarketSystem : MonoSingleton<MarketSystem>
         _downImage.SetActive(false);
         _upImage.SetActive(true);
         StartCoroutine(MarketPanelMove());
+    }
+
+    public void PlayerPrefPlacement()
+    {
+        if (PlayerPrefs.HasKey("Gun2"))
+            gun2 = 1;
+        if (PlayerPrefs.HasKey("Gun3"))
+            gun3 = 1;
+    }
+
+    public void GunBuy(int i)
+    {
+        if (i == 2)
+        {
+            PlayerPrefs.SetInt("Gun2", 1);
+            gun2 = 1;
+            StartCoroutine(GunFire.Instance.GunFireStart(1));
+        }
+        if (i == 3)
+        {
+            PlayerPrefs.SetInt("Gun3", 1);
+            gun3 = 1;
+            StartCoroutine(GunFire.Instance.GunFireStart(2));
+        }
+        GameStart();
     }
 
     private void MarketButton()

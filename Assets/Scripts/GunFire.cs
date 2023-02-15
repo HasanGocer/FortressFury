@@ -14,7 +14,7 @@ public class GunFire : MonoSingleton<GunFire>
     [SerializeField] float _gunScalePower;
     Quaternion tempQuaternion;
 
-    public IEnumerator GunFireStart()
+    public IEnumerator GunFireStart(int gunCount)
     {
         WalkerManager walkerManager = WalkerManager.Instance;
         GameManager gameManager = GameManager.Instance;
@@ -23,7 +23,7 @@ public class GunFire : MonoSingleton<GunFire>
 
         bool isRivalSee = false;
         int tempRivalCount = -1;
-        tempQuaternion = mainManager.Guns[mainManager.gunCount].transform.rotation;
+        tempQuaternion = mainManager.allGuns[gunCount].Guns[mainManager.gunCount].transform.rotation;
 
         yield return null;
 
@@ -32,21 +32,10 @@ public class GunFire : MonoSingleton<GunFire>
             yield return null;
             if (gameManager.level % WalkerManager.Instance.bossModLevel != 0)
             {
-                if (walkerManager.Walker.Count > 0)
-                    for (int i = 0; i < walkerManager.Walker.Count; i++)
-                        if (itemData.field.gunDistance > Vector3.Distance(walkerManager.Walker[i].transform.position, mainManager.GunIDs[mainManager.gunCount].mainCharacter.transform.position))
-                            if (isRivalSee)
-                            {
-                                if (Vector3.Distance(walkerManager.Walker[tempRivalCount].transform.position, mainManager.GunIDs[mainManager.gunCount].mainCharacter.transform.position) > Vector3.Distance(walkerManager.Walker[i].transform.position, mainManager.GunIDs[mainManager.gunCount].mainCharacter.transform.position))
-                                    RivalSeeTrue(ref isRivalSee, ref tempRivalCount, i);
-                            }
-                            else
-                                RivalSeeTrue(ref isRivalSee, ref tempRivalCount, i);
+                Hit(walkerManager, itemData, mainManager, isRivalSee, tempRivalCount, gunCount);
 
                 if (isRivalSee)
                 {
-                    foreach (GameObject pos in mainManager.GunIDs[mainManager.gunCount].hitStartPos)
-                        HitRival(walkerManager.Walker[tempRivalCount], pos, mainManager, itemData);
                     yield return new WaitForSeconds(itemData.field.gunReloadTime);
                     RivalSeeFalse(ref isRivalSee, ref tempRivalCount);
                 }
@@ -62,6 +51,25 @@ public class GunFire : MonoSingleton<GunFire>
         }
     }
 
+    private void Hit(WalkerManager walkerManager, ItemData itemData, MainManager mainManager, bool isRivalSee, int tempRivalCount, int gunCount)
+    {
+        if (walkerManager.Walker.Count > 0)
+            for (int i = 0; i < walkerManager.Walker.Count; i++)
+                if (itemData.field.gunDistance > Vector3.Distance(walkerManager.Walker[i].transform.position, mainManager.allGuns[gunCount].GunIDs[mainManager.gunCount].mainCharacter.transform.position))
+                    if (isRivalSee)
+                    {
+                        if (Vector3.Distance(walkerManager.Walker[tempRivalCount].transform.position, mainManager.allGuns[gunCount].GunIDs[mainManager.gunCount].mainCharacter.transform.position) > Vector3.Distance(walkerManager.Walker[i].transform.position, mainManager.allGuns[gunCount].GunIDs[mainManager.gunCount].mainCharacter.transform.position))
+                            RivalSeeTrue(ref isRivalSee, ref tempRivalCount, i);
+                    }
+                    else
+                        RivalSeeTrue(ref isRivalSee, ref tempRivalCount, i);
+
+        if (isRivalSee)
+        {
+            foreach (GameObject pos in mainManager.allGuns[gunCount].GunIDs[mainManager.gunCount].hitStartPos)
+                HitRival(walkerManager.Walker[tempRivalCount], pos, mainManager, itemData, gunCount);
+        }
+    }
     private void RivalSeeTrue(ref bool isRivalSee, ref int tempRivalCount, int i)
     {
         isRivalSee = true;
@@ -72,15 +80,15 @@ public class GunFire : MonoSingleton<GunFire>
         isRivalSee = false;
         tempRivalCount = -1;
     }
-    private void HitRival(GameObject focusRival, GameObject pos, MainManager mainManager, ItemData itemData)
+    private void HitRival(GameObject focusRival, GameObject pos, MainManager mainManager, ItemData itemData, int gunCount)
     {
         if (focusRival.activeInHierarchy)
         {
             GameObject hit = GetObject();
             HitPlacement(ref hit, pos);
             GunEffect(hit, focusRival);
-            GunLookFocusRival(focusRival, mainManager);
-            GunShake(mainManager, itemData);
+            GunLookFocusRival(focusRival, mainManager, gunCount);
+            GunShake(mainManager, itemData, gunCount);
             StartCoroutine(HitMove(hit, focusRival));
         }
     }
@@ -95,14 +103,14 @@ public class GunFire : MonoSingleton<GunFire>
     private void GunEffect(GameObject pos, GameObject target)
     {
     }
-    private void GunLookFocusRival(GameObject focusRival, MainManager mainManager)
+    private void GunLookFocusRival(GameObject focusRival, MainManager mainManager, int gunCount)
     {
-        mainManager.Guns[mainManager.gunCount].transform.LookAt(focusRival.transform);
-        mainManager.Guns[mainManager.gunCount].transform.rotation = new Quaternion(tempQuaternion.x, mainManager.Guns[mainManager.gunCount].transform.rotation.y, tempQuaternion.z, mainManager.Guns[mainManager.gunCount].transform.rotation.w);
+        mainManager.allGuns[gunCount].Guns[mainManager.gunCount].transform.LookAt(focusRival.transform);
+        mainManager.allGuns[gunCount].Guns[mainManager.gunCount].transform.rotation = new Quaternion(tempQuaternion.x, mainManager.allGuns[gunCount].Guns[mainManager.gunCount].transform.rotation.y, tempQuaternion.z, mainManager.allGuns[gunCount].Guns[mainManager.gunCount].transform.rotation.w);
     }
-    private void GunShake(MainManager mainManager, ItemData itemData)
+    private void GunShake(MainManager mainManager, ItemData itemData, int gunCount)
     {
-        mainManager.Guns[mainManager.gunCount].transform.DOShakeScale(itemData.field.gunReloadTime, _gunScalePower);
+        mainManager.allGuns[gunCount].Guns[mainManager.gunCount].transform.DOShakeScale(itemData.field.gunReloadTime, _gunScalePower);
     }
     private IEnumerator HitMove(GameObject hit, GameObject pos)
     {

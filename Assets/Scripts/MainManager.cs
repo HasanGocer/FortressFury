@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class MainManager : MonoSingleton<MainManager>
 {
+    [System.Serializable]
+    public class AllGuns
+    {
+        public List<GameObject> Guns = new List<GameObject>();
+        public List<GunID> GunIDs = new List<GunID>();
+    }
+
     [Header("Main_Field")]
     [Space(10)]
 
-    public List<GameObject> Guns = new List<GameObject>();
-    public List<GunID> GunIDs = new List<GunID>();
+
+
+    public List<AllGuns> allGuns = new List<AllGuns>();
     public int gunCount;
     public int mainHealth;
+    public GameObject castle;
 
     [Header("Main_Component")]
     [Space(10)]
@@ -24,7 +33,8 @@ public class MainManager : MonoSingleton<MainManager>
         else
             PlayerPrefs.SetInt("gunCount", gunCount);
 
-        Guns[gunCount].SetActive(true);
+        foreach (AllGuns item in allGuns)
+            item.Guns[gunCount].SetActive(true);
     }
 
     public void StartMainManager()
