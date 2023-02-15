@@ -74,8 +74,8 @@ namespace Animancer
         /// </summary>
         public bool StopOnDisable
         {
-            get { return !_Animator.keepAnimatorControllerStateOnDisable; }
-            set { _Animator.keepAnimatorControllerStateOnDisable = !value; }
+            get { return !_Animator.keepAnimatorStateOnDisable; }
+            set { _Animator.keepAnimatorStateOnDisable = !value; }
         }
 #endif
 
@@ -310,7 +310,7 @@ namespace Animancer
             IsPlaying = false;
 
 #if UNITY_2018_1_OR_NEWER
-            if (_Animator.keepAnimatorControllerStateOnDisable)
+            if (_Animator.keepAnimatorStateOnDisable)
                 return;
 #endif
 
