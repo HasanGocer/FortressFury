@@ -25,6 +25,7 @@ public class FinishSystem : MonoSingleton<FinishSystem>
         else
             buttons.NotBossFinal();
         Buttons.Instance.SettingPanelOff();
+        ParticalSystem.Instance.CallNewObjectPartical();
         MarketSystem.Instance.GameFinish();
         LevelManager.Instance.LevelCheck();
         buttons.winPanel.SetActive(true);

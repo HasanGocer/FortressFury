@@ -25,6 +25,7 @@ public class GunBuy : MonoBehaviour
         GameManager gameManager = GameManager.Instance;
         if (gameManager.money >= gunPrice)
         {
+            ParticalSystem.Instance.CallNewObjectPartical();
             MoneySystem.Instance.MoneyTextRevork(-1 * gunPrice);
             GunOpen();
         }

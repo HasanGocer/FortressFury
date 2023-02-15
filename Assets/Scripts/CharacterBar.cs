@@ -71,6 +71,7 @@ public class CharacterBar : MonoBehaviour
             CoinSpawn.Instance.Spawn(gameObject, finishPos);
             MoneySystem.Instance.MoneyTextRevork(money);
             PointText.Instance.CallCoinText(gameObject, money);
+            ParticalSystem.Instance.CallWalkerDiePartical(gameObject);
             FinishSystem.Instance.FinishCheck();
             Vibration.Vibrate(30);
             walkerManager.RemoveWalker(gameObject);

@@ -102,6 +102,7 @@ public class GunFire : MonoSingleton<GunFire>
     }
     private void GunEffect(GameObject pos, GameObject target)
     {
+        ParticalSystem.Instance.CallHitPartical(pos, target);
     }
     private void GunLookFocusRival(GameObject focusRival, MainManager mainManager, int gunCount)
     {
