@@ -13,8 +13,8 @@ public class WalkerManager : MonoSingleton<WalkerManager>
     public int walkerCount;
     public int bossModLevel;
     public int minPrice, maxPrice;
-    [SerializeField] float _maxWalkerDisance, _maxWalkerQuaternionDistance;
-    [SerializeField] float _speedFactor, _quaternionFactor;
+    [SerializeField] float _maxWalkerDisance;
+    [SerializeField] float _speedFactor;
     [SerializeField] int levelModRunnerPlusCount;
     [SerializeField] float _spawnCoundownTime;
     [SerializeField] int _OPRunnerCount;
