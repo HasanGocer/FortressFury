@@ -48,7 +48,6 @@ public class WalkerManager : MonoSingleton<WalkerManager>
             walkerCount += walkerCount + (levelModRunnerPlusCount * i1);
             for (int i2 = 0; i2 < walkerCount + (levelModRunnerPlusCount * i1); i2++)
             {
-                print(1);
                 GameObject obj = GetObject(i1);
                 WalkerID walkerID = obj.GetComponent<WalkerID>();
 
@@ -72,7 +71,7 @@ public class WalkerManager : MonoSingleton<WalkerManager>
     private void StartNewRunner(GameObject walker, WalkerID walkerID)
     {
         WalkerPlacement(ref walker, _walkerStartPos);
-        StartCoroutine(WalkPart(walker, _walkerFinishPos, _speedFactor + ItemData.Instance.field.walkerSpeed, walkerID, _maxWalkerDisance));
+        StartCoroutine(WalkPart(walker, _walkerFinishPos, _speedFactor, walkerID, _maxWalkerDisance));
     }
     private void WalkerPlacement(ref GameObject walker, GameObject pos)
     {

@@ -18,7 +18,6 @@ public class MainBar : MonoSingleton<MainBar>
         {
             mainCamera = Camera.main.gameObject;
             mainBar.SetActive(true);
-            StartCoroutine(LookCamera());
         }
     }
 

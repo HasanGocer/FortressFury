@@ -242,7 +242,7 @@ MonoBehaviour:
   OPHitCount: 3
   _hitSpeedFactor: 5
   _maxHitDisance: 0.3
-  _gunScalePower: 0.4
+  _gunScalePower: 0.05
 --- !u!114 &13331510 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8400447598286569610, guid: d9cc51298e8e79341852a4f9142491c8, type: 3}
@@ -53827,7 +53827,7 @@ MonoBehaviour:
     poolSize: 200
   - objectPrefab: {fileID: 4804167927645684884, guid: b09aee856024c2a4e9ca0981c9a07142, type: 3}
     poolSize: 200
-  - objectPrefab: {fileID: 193170, guid: 07f89bdb820892e49bcd5c32bf299006, type: 3}
+  - objectPrefab: {fileID: 5901677798901233307, guid: 9aa952043e4c0a244a3a0f1151e639a6, type: 3}
     poolSize: 300
   - objectPrefab: {fileID: 153256, guid: fe394d041df1a0547990f49cf653249f, type: 3}
     poolSize: 300
@@ -53895,17 +53895,15 @@ MonoBehaviour:
     walkerCount: 0
     walkerTypeCount: 0
     gunReloadTime: 0
-    walkerSpeed: 0
   standart:
-    castleHealth: 0
-    gunDistance: 0
-    gunAtackPower: 0
-    walkerHealth: 0
-    walkerCastleHitPower: 0
-    walkerCount: 0
-    walkerTypeCount: 0
-    gunReloadTime: 0
-    walkerSpeed: 0
+    castleHealth: 20
+    gunDistance: 20
+    gunAtackPower: 1
+    walkerHealth: 1
+    walkerCastleHitPower: 3
+    walkerCount: 10
+    walkerTypeCount: -1
+    gunReloadTime: 0.5
   factor:
     castleHealth: 1
     gunDistance: 1
@@ -53915,27 +53913,24 @@ MonoBehaviour:
     walkerCount: 1
     walkerTypeCount: 1
     gunReloadTime: 1
-    walkerSpeed: 1
   constant:
-    castleHealth: 0
-    gunDistance: 0
-    gunAtackPower: 0
-    walkerHealth: 0
-    walkerCastleHitPower: 0
-    walkerCount: 0
-    walkerTypeCount: 0
-    gunReloadTime: 0
-    walkerSpeed: 0
+    castleHealth: 10
+    gunDistance: 10
+    gunAtackPower: 1
+    walkerHealth: 2
+    walkerCastleHitPower: 3
+    walkerCount: 10
+    walkerTypeCount: 1
+    gunReloadTime: 0.02
   maxFactor:
-    castleHealth: 0
-    gunDistance: 0
-    gunAtackPower: 0
-    walkerHealth: 0
-    walkerCastleHitPower: 0
-    walkerCount: 0
-    walkerTypeCount: 0
-    gunReloadTime: 0
-    walkerSpeed: 0
+    castleHealth: 10
+    gunDistance: 10
+    gunAtackPower: 10
+    walkerHealth: 10
+    walkerCastleHitPower: 10
+    walkerCount: 30
+    walkerTypeCount: 3
+    gunReloadTime: 10
   max:
     castleHealth: 0
     gunDistance: 0
@@ -53945,7 +53940,6 @@ MonoBehaviour:
     walkerCount: 0
     walkerTypeCount: 0
     gunReloadTime: 0
-    walkerSpeed: 0
   fieldPrice:
     castleHealth: 0
     gunDistance: 0
@@ -53955,7 +53949,6 @@ MonoBehaviour:
     walkerCount: 0
     walkerTypeCount: 0
     gunReloadTime: 0
-    walkerSpeed: 0
 --- !u!114 &1311142911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70110,8 +70103,8 @@ MonoBehaviour:
   minPrice: 2
   maxPrice: 5
   _maxWalkerDisance: 0.3
-  _speedFactor: 5
-  levelModRunnerPlusCount: 10
+  _speedFactor: 1
+  levelModRunnerPlusCount: 15
   _spawnCoundownTime: 0.2
   _OPRunnerCount: 9
   _walkerStartPos: {fileID: 350321998}

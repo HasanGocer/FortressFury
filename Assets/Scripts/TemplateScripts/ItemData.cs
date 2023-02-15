@@ -8,7 +8,7 @@ public class ItemData : MonoSingleton<ItemData>
     public class Field
     {
         public int castleHealth, gunDistance, gunAtackPower, walkerHealth, walkerCastleHitPower, walkerCount, walkerTypeCount;
-        public float gunReloadTime, walkerSpeed;
+        public float gunReloadTime;
     }
 
     public Field field;
@@ -37,8 +37,6 @@ public class ItemData : MonoSingleton<ItemData>
         fieldPrice.walkerCount = fieldPrice.walkerCount * factor.walkerCount;
         field.walkerTypeCount = standart.walkerTypeCount + (factor.walkerTypeCount * constant.walkerTypeCount);
         fieldPrice.walkerTypeCount = fieldPrice.walkerTypeCount * factor.walkerTypeCount;
-        field.walkerSpeed = standart.walkerSpeed + (factor.walkerSpeed * constant.walkerSpeed);
-        fieldPrice.walkerSpeed = fieldPrice.walkerSpeed * factor.walkerSpeed;
 
         /*
          field.objectCount = standart.objectCount + (factor.objectCount * constant.objectCount);
@@ -100,13 +98,6 @@ public class ItemData : MonoSingleton<ItemData>
             field.walkerTypeCount = standart.walkerTypeCount + (factor.walkerTypeCount * constant.walkerTypeCount);
             fieldPrice.walkerTypeCount = fieldPrice.walkerTypeCount / (factor.walkerTypeCount - 1);
             fieldPrice.walkerTypeCount = fieldPrice.walkerTypeCount * factor.walkerTypeCount;
-        }
-        if (factor.walkerSpeed > maxFactor.walkerSpeed)
-        {
-            factor.walkerSpeed = maxFactor.walkerSpeed;
-            field.walkerSpeed = standart.walkerSpeed + (factor.walkerSpeed * constant.walkerSpeed);
-            fieldPrice.walkerSpeed = fieldPrice.walkerSpeed / (factor.walkerSpeed - 1);
-            fieldPrice.walkerSpeed = fieldPrice.walkerSpeed * factor.walkerSpeed;
         }
 
         /*
@@ -264,24 +255,6 @@ public class ItemData : MonoSingleton<ItemData>
             field.walkerTypeCount = standart.walkerTypeCount + (factor.walkerTypeCount * constant.walkerTypeCount);
             fieldPrice.walkerTypeCount = fieldPrice.walkerTypeCount / (factor.walkerTypeCount - 1);
             fieldPrice.walkerTypeCount = fieldPrice.walkerTypeCount * factor.walkerTypeCount;
-        }
-
-        GameManager.Instance.FactorPlacementWrite(factor);
-    }
-    public void SetWalkerSpeed()
-    {
-        factor.walkerSpeed++;
-
-        field.walkerSpeed = standart.walkerSpeed + (factor.walkerSpeed * constant.walkerSpeed);
-        fieldPrice.walkerSpeed = fieldPrice.walkerSpeed / (factor.walkerSpeed - 1);
-        fieldPrice.walkerSpeed = fieldPrice.walkerSpeed * factor.walkerSpeed;
-
-        if (factor.walkerSpeed > maxFactor.walkerSpeed)
-        {
-            factor.walkerSpeed = maxFactor.walkerSpeed;
-            field.walkerSpeed = standart.walkerSpeed + (factor.walkerSpeed * constant.walkerSpeed);
-            fieldPrice.walkerSpeed = fieldPrice.walkerSpeed / (factor.walkerSpeed - 1);
-            fieldPrice.walkerSpeed = fieldPrice.walkerSpeed * factor.walkerSpeed;
         }
 
         GameManager.Instance.FactorPlacementWrite(factor);

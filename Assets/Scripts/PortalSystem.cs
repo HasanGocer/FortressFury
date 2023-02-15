@@ -23,9 +23,13 @@ public class PortalSystem : MonoSingleton<PortalSystem>
             StartCoroutine(GunFire.Instance.GunFireStart(1));
         if (MarketSystem.Instance.gun3 == 1)
             StartCoroutine(GunFire.Instance.GunFireStart(2));
+        print(1);
         MainBar.Instance.MainBarStart();
+        print(2);
         MarketSystem.Instance.GameStart();
+        print(3);
         WalkerManager.Instance.FirstSpawn();
+        print(4);
     }
 
 }
