@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using DamageNumbersPro;
 
 public class PointText : MonoSingleton<PointText>
 {
@@ -27,7 +28,7 @@ public class PointText : MonoSingleton<PointText>
     {
         GameObject obj = ObjectPool.Instance.GetPooledObject(_OPDamageTextCount);
 
-        obj.GetComponent<TMP_Text>().text = count.ToString();
+        obj.GetComponent<DamageNumberMesh>().number = count;
         obj.transform.position = Pos.transform.position;
         yield return new WaitForSeconds(_textMoveTime);
         ObjectPool.Instance.AddObject(_OPDamageTextCount, obj);
@@ -36,7 +37,7 @@ public class PointText : MonoSingleton<PointText>
     {
         GameObject obj = ObjectPool.Instance.GetPooledObject(_OPCoinTextCount);
 
-        obj.GetComponent<TMP_Text>().text = count.ToString();
+        obj.GetComponent<DamageNumberMesh>().number = count;
         obj.transform.position = Pos.transform.position;
         yield return new WaitForSeconds(_textMoveTime);
         ObjectPool.Instance.AddObject(_OPCoinTextCount, obj);

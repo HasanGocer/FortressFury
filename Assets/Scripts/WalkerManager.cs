@@ -44,8 +44,14 @@ public class WalkerManager : MonoSingleton<WalkerManager>
     private IEnumerator StartWalkerWalk(int walkerCount, ItemData itemData)
     {
         for (int i1 = itemData.field.walkerTypeCount; i1 >= 0; i1--)
+            for (int i2 = 0; i2 < walkerCount + (levelModRunnerPlusCount * i1); i2++)
+            {
+                this.walkerCount++;
+                yield return null;
+            }
+
+        for (int i1 = itemData.field.walkerTypeCount; i1 >= 0; i1--)
         {
-            walkerCount += walkerCount + (levelModRunnerPlusCount * i1);
             for (int i2 = 0; i2 < walkerCount + (levelModRunnerPlusCount * i1); i2++)
             {
                 GameObject obj = GetObject(i1);

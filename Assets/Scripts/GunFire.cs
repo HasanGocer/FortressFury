@@ -12,8 +12,13 @@ public class GunFire : MonoSingleton<GunFire>
     [SerializeField] float _hitSpeedFactor;
     [SerializeField] float _maxHitDisance;
     [SerializeField] float _gunScalePower;
+    [SerializeField] float _gunScale;
     Quaternion tempQuaternion;
 
+    public void BackAddedHit(GameObject hit)
+    {
+        ObjectPool.Instance.AddObject(OPHitCount, hit);
+    }
     public IEnumerator GunFireStart(int gunCount)
     {
         WalkerManager walkerManager = WalkerManager.Instance;
@@ -32,10 +37,21 @@ public class GunFire : MonoSingleton<GunFire>
             yield return null;
             if (gameManager.level % WalkerManager.Instance.bossModLevel != 0)
             {
-                Hit(walkerManager, itemData, mainManager, isRivalSee, tempRivalCount, gunCount);
+                if (walkerManager.Walker.Count > 0)
+                    for (int i = 0; i < walkerManager.Walker.Count; i++)
+                        if (itemData.field.gunDistance > Vector3.Distance(walkerManager.Walker[i].transform.position, mainManager.allGuns[gunCount].GunIDs[mainManager.gunCount].mainCharacter.transform.position))
+                            if (isRivalSee)
+                            {
+                                if (Vector3.Distance(walkerManager.Walker[tempRivalCount].transform.position, mainManager.allGuns[gunCount].GunIDs[mainManager.gunCount].mainCharacter.transform.position) > Vector3.Distance(walkerManager.Walker[i].transform.position, mainManager.allGuns[gunCount].GunIDs[mainManager.gunCount].mainCharacter.transform.position))
+                                    RivalSeeTrue(ref isRivalSee, ref tempRivalCount, i);
+                            }
+                            else
+                                RivalSeeTrue(ref isRivalSee, ref tempRivalCount, i);
 
                 if (isRivalSee)
                 {
+                    foreach (GameObject pos in mainManager.allGuns[gunCount].GunIDs[mainManager.gunCount].hitStartPos)
+                        HitRival(walkerManager.Walker[tempRivalCount], pos, mainManager, itemData, gunCount);
                     yield return new WaitForSeconds(itemData.field.gunReloadTime);
                     RivalSeeFalse(ref isRivalSee, ref tempRivalCount);
                 }
@@ -51,25 +67,6 @@ public class GunFire : MonoSingleton<GunFire>
         }
     }
 
-    private void Hit(WalkerManager walkerManager, ItemData itemData, MainManager mainManager, bool isRivalSee, int tempRivalCount, int gunCount)
-    {
-        if (walkerManager.Walker.Count > 0)
-            for (int i = 0; i < walkerManager.Walker.Count; i++)
-                if (itemData.field.gunDistance > Vector3.Distance(walkerManager.Walker[i].transform.position, mainManager.allGuns[gunCount].GunIDs[mainManager.gunCount].mainCharacter.transform.position))
-                    if (isRivalSee)
-                    {
-                        if (Vector3.Distance(walkerManager.Walker[tempRivalCount].transform.position, mainManager.allGuns[gunCount].GunIDs[mainManager.gunCount].mainCharacter.transform.position) > Vector3.Distance(walkerManager.Walker[i].transform.position, mainManager.allGuns[gunCount].GunIDs[mainManager.gunCount].mainCharacter.transform.position))
-                            RivalSeeTrue(ref isRivalSee, ref tempRivalCount, i);
-                    }
-                    else
-                        RivalSeeTrue(ref isRivalSee, ref tempRivalCount, i);
-
-        if (isRivalSee)
-        {
-            foreach (GameObject pos in mainManager.allGuns[gunCount].GunIDs[mainManager.gunCount].hitStartPos)
-                HitRival(walkerManager.Walker[tempRivalCount], pos, mainManager, itemData, gunCount);
-        }
-    }
     private void RivalSeeTrue(ref bool isRivalSee, ref int tempRivalCount, int i)
     {
         isRivalSee = true;
@@ -124,10 +121,5 @@ public class GunFire : MonoSingleton<GunFire>
             yield return new WaitForSeconds(Time.deltaTime);
             if (_maxHitDisance > Vector3.Distance(hit.transform.position, pos.transform.position)) break;
         }
-        BackAddedHit(hit);
-    }
-    private void BackAddedHit(GameObject hit)
-    {
-        ObjectPool.Instance.AddObject(GunFire.Instance.OPHitCount, hit);
     }
 }
