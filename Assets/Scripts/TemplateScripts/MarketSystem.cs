@@ -18,6 +18,7 @@ public class MarketSystem : MonoSingleton<MarketSystem>
         public List<TMP_Text> MarketMainFieldLevel = new List<TMP_Text>();
         public List<TMP_Text> MarketMainFieldPrice = new List<TMP_Text>();
         public List<Button> PlayerImageButton = new List<Button>();
+        public List<Image> PlayerImageButtonImage = new List<Image>();
     }
 
     [Header("Market_Main_Field")]
@@ -28,20 +29,19 @@ public class MarketSystem : MonoSingleton<MarketSystem>
     [Header("Market_UI_Field")]
     [Space(10)]
 
-    [SerializeField] private Button _marketButton;
-    [SerializeField] private GameObject _marketOpenPos, _marketClosePos;
-    [SerializeField] GameObject _upImage, _downImage;
     public RectTransform marketPanel;
-    [SerializeField] GameObject _marketScrollPanel;
-    [SerializeField] float _panelLerpMinDistance;
-    [SerializeField] int _panelLerpFactor;
-    public bool isOpen = false;
+
+    [Header("Turret_Field")]
+    [Space(10)]
+
+    [SerializeField] GameObject _turretBuyPanel;
     public int gun2, gun3;
-    [SerializeField] GameObject gun2GO, gun3GO;
+    [SerializeField] GameObject _gun2GO, _gun3GO;
+    [SerializeField] int _gunPrice;
+    [SerializeField] Button _gun2Button, _gun3Button;
 
     public void MarketStart()
     {
-        MarketOnOffPlacement();
         TextPlacement();
         MarketButtonPlacement();
         PlayerPrefPlacement();
@@ -51,22 +51,40 @@ public class MarketSystem : MonoSingleton<MarketSystem>
     {
         if (gun2 == 1 && gun3 == 1)
         {
-            _marketScrollPanel.SetActive(true);
             marketPanel.gameObject.SetActive(true);
+            _turretBuyPanel.SetActive(false);
+        }
+        else
+        {
+            marketPanel.gameObject.SetActive(false);
+            _turretBuyPanel.SetActive(true);
+            if (gun2 == 1)
+            {
+                _gun2Button.gameObject.SetActive(false);
+                _gun2GO.SetActive(true);
+            }
+            if (gun3 == 1)
+            {
+                _gun3Button.gameObject.SetActive(false);
+                _gun3GO.SetActive(true);
+            }
+        }
+    }
+
+    public void ButtonColorPlacement()
+    {
+        ItemData itemData = ItemData.Instance;
+        GameManager gameManager = GameManager.Instance;
+
+        if (gameManager.money >= itemData.fieldPrice.castleHealth)
+        {
+            marketMainField.PlayerImageButton.
         }
     }
 
     public void GameFinish()
     {
-        _marketScrollPanel.SetActive(false);
         marketPanel.gameObject.SetActive(false);
-    }
-
-    public void MarketPanelOff()
-    {
-        _downImage.SetActive(false);
-        _upImage.SetActive(true);
-        StartCoroutine(MarketPanelMove());
     }
 
     public void PlayerPrefPlacement()
@@ -75,45 +93,29 @@ public class MarketSystem : MonoSingleton<MarketSystem>
             gun2 = 1;
         if (PlayerPrefs.HasKey("Gun3"))
             gun3 = 1;
-
-        if (gun2 == 1)
-            gun2GO.GetComponent<GunBuy>().GunOpen();
-        if (gun3 == 1)
-            gun3GO.GetComponent<GunBuy>().GunOpen();
     }
 
-    public void GunBuy(int i)
+    private void GunBuy(int i)
     {
-        if (i == 2)
+        if (i == 2 && _gunPrice <= GameManager.Instance.money)
         {
+            _gun2GO.SetActive(true);
+            ParticalSystem.Instance.CallNewObjectPartical();
+            MoneySystem.Instance.MoneyTextRevork(-1 * _gunPrice);
             PlayerPrefs.SetInt("Gun2", 1);
             gun2 = 1;
             StartCoroutine(GunFire.Instance.GunFireStart(1));
         }
-        if (i == 3)
+        if (i == 3 && _gunPrice <= GameManager.Instance.money)
         {
+            _gun3GO.SetActive(true);
+            ParticalSystem.Instance.CallNewObjectPartical();
+            MoneySystem.Instance.MoneyTextRevork(-1 * _gunPrice);
             PlayerPrefs.SetInt("Gun3", 1);
             gun3 = 1;
             StartCoroutine(GunFire.Instance.GunFireStart(2));
         }
         GameStart();
-    }
-
-    private void MarketButton()
-    {
-        if (!isOpen)
-        {
-            Buttons.Instance.SettingPanelOff();
-            _downImage.SetActive(true);
-            _upImage.SetActive(false);
-            StartCoroutine(MarketPanelMove());
-        }
-        else
-        {
-            _downImage.SetActive(false);
-            _upImage.SetActive(true);
-            StartCoroutine(MarketPanelMove());
-        }
     }
     private void MarketButtonPlacement()
     {
@@ -121,37 +123,8 @@ public class MarketSystem : MonoSingleton<MarketSystem>
         marketMainField.PlayerImageButton[1].onClick.AddListener(() => FieldBuy(1));
         marketMainField.PlayerImageButton[2].onClick.AddListener(() => FieldBuy(2));
         marketMainField.PlayerImageButton[3].onClick.AddListener(() => FieldBuy(3));
-    }
-    private IEnumerator MarketPanelMove()
-    {
-        float lerpCount = 0;
-        GameObject tempPos;
-        if (isOpen)
-        {
-            tempPos = _marketClosePos;
-            while (isOpen)
-            {
-                lerpCount += Time.deltaTime * _panelLerpFactor;
-                marketPanel.position = Vector2.Lerp(marketPanel.position, tempPos.transform.position, lerpCount);
-                yield return new WaitForSeconds(Time.deltaTime);
-                if (_panelLerpMinDistance >= Vector2.Distance(marketPanel.position, tempPos.transform.position)) break;
-            }
-            isOpen = false;
-        }
-        else
-        {
-            tempPos = _marketOpenPos;
-            while (!isOpen)
-            {
-                lerpCount += Time.deltaTime * _panelLerpFactor;
-                marketPanel.position = Vector2.Lerp(marketPanel.position, tempPos.transform.position, lerpCount);
-                yield return new WaitForSeconds(Time.deltaTime);
-                if (_panelLerpMinDistance >= Vector2.Distance(marketPanel.position, tempPos.transform.position)) break;
-            }
-            isOpen = true;
-        }
-
-
+        _gun2Button.onClick.AddListener(() => GunBuy(2));
+        _gun3Button.onClick.AddListener(() => GunBuy(3));
     }
     private void FieldBuy(int fieldCount)
     {
@@ -215,9 +188,5 @@ public class MarketSystem : MonoSingleton<MarketSystem>
 
         marketMainField.MarketMainFieldPrice[3].text = moneySystem.NumberTextRevork((int)itemData.fieldPrice.gunReloadTime);
         marketMainField.MarketMainFieldLevel[3].text = "Level " + itemData.factor.gunReloadTime;
-    }
-    private void MarketOnOffPlacement()
-    {
-        _marketButton.onClick.AddListener(MarketButton);
     }
 }
