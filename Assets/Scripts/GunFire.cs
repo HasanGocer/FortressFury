@@ -106,9 +106,11 @@ public class GunFire : MonoSingleton<GunFire>
         mainManager.allGuns[gunCount].Guns[mainManager.gunCount].transform.LookAt(focusRival.transform);
         mainManager.allGuns[gunCount].Guns[mainManager.gunCount].transform.rotation = new Quaternion(tempQuaternion.x, mainManager.allGuns[gunCount].Guns[mainManager.gunCount].transform.rotation.y, tempQuaternion.z, mainManager.allGuns[gunCount].Guns[mainManager.gunCount].transform.rotation.w);
     }
-    private void GunShake(MainManager mainManager, ItemData itemData, int gunCount)
+    private IEnumerator GunShake(MainManager mainManager, ItemData itemData, int gunCount)
     {
         mainManager.allGuns[gunCount].Guns[mainManager.gunCount].transform.DOShakeScale(itemData.field.gunReloadTime, _gunScalePower);
+        yield return new WaitForSeconds(itemData.field.gunReloadTime);
+        mainManager.allGuns[gunCount].Guns[mainManager.gunCount].transform.localScale = new Vector3(_gunScale, _gunScale, _gunScale);
     }
     private IEnumerator HitMove(GameObject hit, GameObject pos)
     {
