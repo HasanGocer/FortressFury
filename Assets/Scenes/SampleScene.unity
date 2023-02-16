@@ -630,11 +630,15 @@ MonoBehaviour:
     - {fileID: 8400447598984119097}
     - {fileID: 8400447598430559818}
     - {fileID: 8400447597657518405}
+    PlayerImageButtonImage:
+    - {fileID: 8400447598984119098}
+    - {fileID: 8400447597657518406}
+    - {fileID: 8400447597889769433}
+    - {fileID: 8400447598430559819}
   marketPanel: {fileID: 8400447598049079330}
   _turretBuyPanel: {fileID: 177686587}
   gun2: 0
   gun3: 0
-  _turretPrice: 100
   _gun2GO: {fileID: 634761699}
   _gun3GO: {fileID: 2019602685}
   _gunPrice: 100
@@ -157201,7 +157205,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8400447598049079330
 RectTransform:
   m_ObjectHideFlags: 0

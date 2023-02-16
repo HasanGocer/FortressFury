@@ -70,6 +70,7 @@ public class CharacterBar : MonoBehaviour
             int money = Random.Range(walkerManager.minPrice, walkerManager.maxPrice);
             CoinSpawn.Instance.Spawn(gameObject, finishPos);
             MoneySystem.Instance.MoneyTextRevork(money);
+            MarketSystem.Instance.ButtonColorPlacement();
             PointText.Instance.CallCoinText(gameObject, money);
             ParticalSystem.Instance.CallWalkerDiePartical(gameObject);
             FinishSystem.Instance.FinishCheck();

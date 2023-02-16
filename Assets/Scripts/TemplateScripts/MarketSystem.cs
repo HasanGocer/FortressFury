@@ -51,6 +51,7 @@ public class MarketSystem : MonoSingleton<MarketSystem>
     {
         if (gun2 == 1 && gun3 == 1)
         {
+            ButtonColorPlacement();
             marketPanel.gameObject.SetActive(true);
             _turretBuyPanel.SetActive(false);
         }
@@ -77,9 +78,22 @@ public class MarketSystem : MonoSingleton<MarketSystem>
         GameManager gameManager = GameManager.Instance;
 
         if (gameManager.money >= itemData.fieldPrice.castleHealth)
-        {
-            marketMainField.PlayerImageButton.
-        }
+            marketMainField.PlayerImageButtonImage[0].color = Color.white;
+        else
+            marketMainField.PlayerImageButtonImage[0].color = Color.gray;
+        if (gameManager.money >= itemData.fieldPrice.gunAtackPower)
+            marketMainField.PlayerImageButtonImage[1].color = Color.white;
+        else
+            marketMainField.PlayerImageButtonImage[1].color = Color.gray;
+        if (gameManager.money >= itemData.fieldPrice.gunDistance)
+            marketMainField.PlayerImageButtonImage[2].color = Color.white;
+        else
+            marketMainField.PlayerImageButtonImage[2].color = Color.gray;
+
+        if (gameManager.money >= itemData.fieldPrice.gunReloadTime)
+            marketMainField.PlayerImageButtonImage[3].color = Color.white;
+        else
+            marketMainField.PlayerImageButtonImage[3].color = Color.gray;
     }
 
     public void GameFinish()
