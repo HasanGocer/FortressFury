@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.28502658, g: 0.37139305, b: 0.49600944, a: 1}
+  m_IndirectSpecularColor: {r: 0.28502697, g: 0.37139347, b: 0.49601266, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -17603,7 +17603,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &602160092
 RectTransform:
   m_ObjectHideFlags: 0
@@ -54262,7 +54262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pools:
-  - objectPrefab: {fileID: 7833291538958460242, guid: 254c34400c65a264da741c4b3def46e5, type: 3}
+  - objectPrefab: {fileID: 9042420963200867371, guid: 254c34400c65a264da741c4b3def46e5, type: 3}
     poolSize: 200
   - objectPrefab: {fileID: 4091896049231155831, guid: b458fa4fb81e0934583e8689b7e7ea6e, type: 3}
     poolSize: 200
@@ -59937,7 +59937,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1465326443
 Transform:
   m_ObjectHideFlags: 0
@@ -70930,7 +70930,7 @@ MonoBehaviour:
   _OPRunnerCount: 10
   _walkerStartPos: {fileID: 350321998}
   _walkerFinishPos: {fileID: 2072863481}
-  _spawnDistance: 1.2
+  _spawnDistance: 2
   _deadTime: 1
 --- !u!1 &1666128303
 GameObject:
@@ -91849,7 +91849,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1945157653
 Transform:
   m_ObjectHideFlags: 0
@@ -92100,7 +92100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2019602686
 Transform:
   m_ObjectHideFlags: 0
@@ -92513,7 +92513,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &2072863482
 BoxCollider:
   m_ObjectHideFlags: 0
