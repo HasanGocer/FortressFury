@@ -12,6 +12,7 @@ public class WalkerID : MonoBehaviour
     public int healthCount;
     public GameObject hitPos;
     public CapsuleCollider capsuleCollider;
+    public AnimController animController;
 
     [Header("Walker_Components")]
     [Space(10)]

@@ -47,6 +47,7 @@ public class CoinSpawn : MonoSingleton<CoinSpawn>
             yield return new WaitForSeconds(Time.deltaTime);
             if (2 > Vector3.Distance(obj.transform.position, Finish.transform.position + new Vector3(0, 4, 0)))
             {
+                SoundSystem.Instance.CallCoinSound();
                 ObjectPool.Instance.AddObject(_OPCoinCount, obj);
                 break;
             }

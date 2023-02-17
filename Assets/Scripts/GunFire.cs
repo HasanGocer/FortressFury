@@ -81,7 +81,7 @@ public class GunFire : MonoSingleton<GunFire>
     {
         if (focusRival.activeInHierarchy)
         {
-            GameObject hit = GetObject();
+            GameObject hit = GetObject(mainManager);
             HitPlacement(ref hit, pos);
             GunEffect(hit, focusRival);
             GunLookFocusRival(focusRival, mainManager, gunCount);
@@ -89,9 +89,9 @@ public class GunFire : MonoSingleton<GunFire>
             StartCoroutine(HitMove(hit, focusRival));
         }
     }
-    private GameObject GetObject()
+    private GameObject GetObject(MainManager mainManager)
     {
-        return ObjectPool.Instance.GetPooledObject(OPHitCount);
+        return ObjectPool.Instance.GetPooledObject(OPHitCount + mainManager.gunCount);
     }
     private void HitPlacement(ref GameObject hit, GameObject pos)
     {
@@ -99,6 +99,7 @@ public class GunFire : MonoSingleton<GunFire>
     }
     private void GunEffect(GameObject pos, GameObject target)
     {
+        SoundSystem.Instance.CallHitSound();
         ParticalSystem.Instance.CallHitPartical(pos, target);
     }
     private void GunLookFocusRival(GameObject focusRival, MainManager mainManager, int gunCount)

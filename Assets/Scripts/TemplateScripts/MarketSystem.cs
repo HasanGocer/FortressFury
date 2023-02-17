@@ -118,6 +118,7 @@ public class MarketSystem : MonoSingleton<MarketSystem>
             MoneySystem.Instance.MoneyTextRevork(-1 * _gunPrice);
             PlayerPrefs.SetInt("Gun2", 1);
             gun2 = 1;
+            SoundSystem.Instance.CallUpgradeSound();
             StartCoroutine(GunFire.Instance.GunFireStart(1));
         }
         if (i == 3 && _gunPrice <= GameManager.Instance.money)
@@ -127,6 +128,7 @@ public class MarketSystem : MonoSingleton<MarketSystem>
             MoneySystem.Instance.MoneyTextRevork(-1 * _gunPrice);
             PlayerPrefs.SetInt("Gun3", 1);
             gun3 = 1;
+            SoundSystem.Instance.CallUpgradeSound();
             StartCoroutine(GunFire.Instance.GunFireStart(2));
         }
         GameStart();
@@ -153,6 +155,7 @@ public class MarketSystem : MonoSingleton<MarketSystem>
                 {
                     moneySystem.MoneyTextRevork(itemData.fieldPrice.castleHealth * -1);
                     itemData.SetCastleHealth();
+                    SoundSystem.Instance.CallUpgradeSound();
                     marketMainField.MarketMainFieldPrice[0].text = moneySystem.NumberTextRevork(itemData.fieldPrice.castleHealth);
                     marketMainField.MarketMainFieldLevel[0].text = "Level " + itemData.factor.castleHealth;
                 }
@@ -162,6 +165,7 @@ public class MarketSystem : MonoSingleton<MarketSystem>
                 {
                     moneySystem.MoneyTextRevork(itemData.fieldPrice.gunAtackPower * -1);
                     itemData.SetGunAtackPower();
+                    SoundSystem.Instance.CallUpgradeSound();
                     marketMainField.MarketMainFieldPrice[1].text = moneySystem.NumberTextRevork(itemData.fieldPrice.gunAtackPower);
                     marketMainField.MarketMainFieldLevel[1].text = "Level " + itemData.factor.gunAtackPower;
                 }
@@ -171,6 +175,7 @@ public class MarketSystem : MonoSingleton<MarketSystem>
                 {
                     moneySystem.MoneyTextRevork(itemData.fieldPrice.gunDistance * -1);
                     itemData.SetGunDistance();
+                    SoundSystem.Instance.CallUpgradeSound();
                     marketMainField.MarketMainFieldPrice[2].text = moneySystem.NumberTextRevork(itemData.fieldPrice.gunDistance);
                     marketMainField.MarketMainFieldLevel[2].text = "Level " + itemData.factor.gunDistance;
                 }
@@ -180,6 +185,7 @@ public class MarketSystem : MonoSingleton<MarketSystem>
                 {
                     moneySystem.MoneyTextRevork((int)itemData.fieldPrice.gunReloadTime * -1);
                     itemData.SetGunReloadTime();
+                    SoundSystem.Instance.CallUpgradeSound();
                     marketMainField.MarketMainFieldPrice[3].text = moneySystem.NumberTextRevork((int)itemData.fieldPrice.gunReloadTime);
                     marketMainField.MarketMainFieldLevel[3].text = "Level " + itemData.factor.gunReloadTime;
                 }

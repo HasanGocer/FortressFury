@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0d169ac27775ee4385ad82bb5c23cbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OPHitCount: 3
+  OPHitCount: 12
   _hitSpeedFactor: 2
   _maxHitDisance: 0.3
   _gunScalePower: 0.05
@@ -54173,8 +54173,6 @@ MonoBehaviour:
     poolSize: 200
   - objectPrefab: {fileID: 4804167927645684884, guid: b09aee856024c2a4e9ca0981c9a07142, type: 3}
     poolSize: 200
-  - objectPrefab: {fileID: 5901677798901233307, guid: 9aa952043e4c0a244a3a0f1151e639a6, type: 3}
-    poolSize: 300
   - objectPrefab: {fileID: 153256, guid: fe394d041df1a0547990f49cf653249f, type: 3}
     poolSize: 300
   - objectPrefab: {fileID: 132352, guid: 71b02155078e4bf4e962f302d3675af2, type: 3}
@@ -54192,6 +54190,8 @@ MonoBehaviour:
   - objectPrefab: {fileID: 5335385920833346368, guid: 6025ebb9179472741b01378f789cd706, type: 3}
     poolSize: 300
   - objectPrefab: {fileID: 5789139584517132691, guid: 1bf44bc08cd8aa946bf902ec8cbf6e0a, type: 3}
+    poolSize: 300
+  - objectPrefab: {fileID: 5901677798901233307, guid: 9aa952043e4c0a244a3a0f1151e639a6, type: 3}
     poolSize: 300
 --- !u!114 &1311142908
 MonoBehaviour:
@@ -54355,12 +54355,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab3b7e757729c64facb41a56e36ee9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _OPWalkerDieParticalCount: 4
-  _OPWalkerHitParticalCount: 5
-  _OPHitParticalCount: 6
-  _OPGunCrashFirstParticalCount: 7
-  _OPGunCrashSecondParticalCount: 8
-  _OPNewObjectParticalCount: 0
+  _OPWalkerDieParticalCount: 3
+  _OPWalkerHitParticalCount: 4
+  _OPHitParticalCount: 5
+  _OPGunCrashFirstParticalCount: 6
+  _OPGunCrashSecondParticalCount: 7
+  _OPNewObjectParticalCount: 8
   _walkerHitCastleParticalTime: 1
   _walkerDieParticalTime: 1
   _hitParticalTime: 1
@@ -70603,7 +70603,7 @@ MonoBehaviour:
   _speedFactor: 1
   levelModRunnerPlusCount: 15
   _spawnCoundownTime: 0.2
-  _OPRunnerCount: 10
+  _OPRunnerCount: 9
   _walkerStartPos: {fileID: 350321998}
   _walkerFinishPos: {fileID: 2072863481}
   _spawnDistance: 1.2
@@ -157205,7 +157205,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8400447598049079330
 RectTransform:
   m_ObjectHideFlags: 0
