@@ -22,7 +22,7 @@ public class WalkerTouch : MonoBehaviour
         {
             walkerID.isLive = false;
             walkerID.capsuleCollider.enabled = false;
-
+            print(31);
             ItemData itemData = ItemData.Instance;
 
             FinishSystem.Instance.FinishCheck();

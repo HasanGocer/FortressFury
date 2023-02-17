@@ -54259,7 +54259,7 @@ MonoBehaviour:
     gunReloadTime: 0
   standart:
     castleHealth: 20
-    gunDistance: 5
+    gunDistance: 10
     gunAtackPower: 0
     walkerHealth: 1
     walkerCastleHitPower: 3
@@ -54277,7 +54277,7 @@ MonoBehaviour:
     gunReloadTime: 1
   constant:
     castleHealth: 10
-    gunDistance: 5
+    gunDistance: 10
     gunAtackPower: 1
     walkerHealth: 2
     walkerCastleHitPower: 3
@@ -54354,8 +54354,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6caf2f834920a548967655e2ac29f61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _portalOpenTime: 2
-  _PortalScale: 10
+  portalOpenTime: 2
+  _PortalOpenScale: 10
+  _PortalCloseScale: 1
   _portal: {fileID: 350321998}
 --- !u!114 &1311142914
 MonoBehaviour:
@@ -70614,7 +70615,7 @@ MonoBehaviour:
   minPrice: 2
   maxPrice: 5
   _maxWalkerDisance: 0.3
-  _speedFactor: 1
+  _speedFactor: 3
   levelModRunnerPlusCount: 15
   _spawnCoundownTime: 0.2
   _OPRunnerCount: 9
@@ -92313,7 +92314,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.48, y: 3.84, z: 4.33}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &2072863483
 MeshRenderer:
@@ -92373,7 +92374,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2072863481}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6999998, z: -18.1168}
+  m_LocalPosition: {x: 0, y: 0.6999998, z: -18.99}
   m_LocalScale: {x: 11.06, y: 2.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
