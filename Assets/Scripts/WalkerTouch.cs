@@ -29,7 +29,7 @@ public class WalkerTouch : MonoBehaviour
             MainBar.Instance.BarUpdate(itemData.field.castleHealth, MainManager.Instance.mainHealth, itemData.field.walkerCastleHitPower);
             ParticalSystem.Instance.CallWalkerHitCastelPartical(gameObject);
             PointText.Instance.CallDamageText(gameObject, itemData.field.walkerCastleHitPower);
-            WalkerManager.Instance.RemoveWalker(gameObject);
+            StartCoroutine(WalkerManager.Instance.RemoveWalker(gameObject, walkerID));
         }
     }
 

@@ -54150,10 +54150,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainSource: {fileID: 1687258587}
   mainMusic: {fileID: 0}
-  hit: {fileID: 0}
-  finish: {fileID: 0}
-  upgrade: {fileID: 0}
-  coin: {fileID: 0}
+  hit: {fileID: 8300000, guid: 8c6d5663d59421441b2abdc7d0757e29, type: 3}
+  finish: {fileID: 8300000, guid: 0bf2838d1605d754a94d35a948bdaaf3, type: 3}
+  upgrade: {fileID: 8300000, guid: e45e6ba5889ec1543b9e12acfed12322, type: 3}
+  coin: {fileID: 8300000, guid: 7e13c18ce5336a247a9f6260bf2f526a, type: 3}
 --- !u!114 &1311142907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54192,6 +54192,20 @@ MonoBehaviour:
   - objectPrefab: {fileID: 5789139584517132691, guid: 1bf44bc08cd8aa946bf902ec8cbf6e0a, type: 3}
     poolSize: 300
   - objectPrefab: {fileID: 5901677798901233307, guid: 9aa952043e4c0a244a3a0f1151e639a6, type: 3}
+    poolSize: 300
+  - objectPrefab: {fileID: 119216, guid: e85f4a610ef9e5b4aa9cedce76136489, type: 3}
+    poolSize: 300
+  - objectPrefab: {fileID: 146404, guid: 41fc6e40715949e47aa61f8001df94fe, type: 3}
+    poolSize: 300
+  - objectPrefab: {fileID: 110446, guid: f6322404d6e3b914aa01ac044fb9415e, type: 3}
+    poolSize: 300
+  - objectPrefab: {fileID: 151808, guid: 5d6f0dd615584fe4a813ab93edc17b31, type: 3}
+    poolSize: 300
+  - objectPrefab: {fileID: 108410, guid: 31f9fcfbbcecdd24caf0eb7857420dcd, type: 3}
+    poolSize: 300
+  - objectPrefab: {fileID: 135046, guid: a10a669b5e36f134781f319ffcf0bb4a, type: 3}
+    poolSize: 300
+  - objectPrefab: {fileID: 171482, guid: 5bc71fb5e90182941b584e88079e3ec5, type: 3}
     poolSize: 300
 --- !u!114 &1311142908
 MonoBehaviour:
@@ -70607,6 +70621,7 @@ MonoBehaviour:
   _walkerStartPos: {fileID: 350321998}
   _walkerFinishPos: {fileID: 2072863481}
   _spawnDistance: 1.2
+  _deadTime: 1
 --- !u!1 &1666128303
 GameObject:
   m_ObjectHideFlags: 0

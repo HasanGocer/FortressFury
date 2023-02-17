@@ -984,6 +984,7 @@ MonoBehaviour:
   healthCount: 0
   hitPos: {fileID: 4585520392703781375}
   capsuleCollider: {fileID: 580300081144801542}
+  animController: {fileID: 7974118397679653216}
   CharacterBar: {fileID: 8659190112429806551}
 --- !u!114 &7696907503279912435
 MonoBehaviour:

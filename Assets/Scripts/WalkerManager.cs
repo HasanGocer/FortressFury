@@ -20,14 +20,16 @@ public class WalkerManager : MonoSingleton<WalkerManager>
     [SerializeField] int _OPRunnerCount;
     [SerializeField] GameObject _walkerStartPos, _walkerFinishPos;
     [SerializeField] float _spawnDistance;
+    [SerializeField] int _deadTime;
 
     public void FirstSpawn()
     {
         ItemData itemData = ItemData.Instance;
+        PortalSystem portalSystem = PortalSystem.Instance;
 
         if (GameManager.Instance.level % 10 != 0)
         {
-            StartCoroutine(StartWalkerWalk(itemData.field.walkerCount, itemData));
+            StartCoroutine(StartWalkerWalk(itemData.field.walkerCount, itemData, portalSystem));
         }
         else
         {
@@ -35,13 +37,15 @@ public class WalkerManager : MonoSingleton<WalkerManager>
         }
     }
 
-    public void RemoveWalker(GameObject walker)
+    public IEnumerator RemoveWalker(GameObject walker, WalkerID walkerID)
     {
+        walkerID.animController.CallDeadAnim();
+        yield return new WaitForSeconds(_deadTime);
         Walker.Remove(walker);
         ObjectPool.Instance.AddObject(_OPRunnerCount + walker.GetComponent<WalkerID>().ID, walker);
     }
 
-    private IEnumerator StartWalkerWalk(int walkerCount, ItemData itemData)
+    private IEnumerator StartWalkerWalk(int walkerCount, ItemData itemData, PortalSystem portalSystem)
     {
         for (int i1 = itemData.field.walkerTypeCount; i1 >= 0; i1--)
             for (int i2 = 0; i2 < walkerCount + (levelModRunnerPlusCount * i1); i2++)
@@ -52,6 +56,12 @@ public class WalkerManager : MonoSingleton<WalkerManager>
 
         for (int i1 = itemData.field.walkerTypeCount; i1 >= 0; i1--)
         {
+            if (i1 != 0)
+            {
+                portalSystem.PortalOpen();
+                yield return new WaitForSeconds(portalSystem.portalOpenTime);
+            }
+
             for (int i2 = 0; i2 < walkerCount + (levelModRunnerPlusCount * i1); i2++)
             {
                 GameObject obj = GetObject(i1);
@@ -60,6 +70,9 @@ public class WalkerManager : MonoSingleton<WalkerManager>
                 WalkerStatPlacement(obj, walkerID, i1, itemData.field.walkerHealth - (i1 * itemData.constant.walkerHealth));
                 yield return new WaitForSeconds(_spawnCoundownTime);
             }
+
+            portalSystem.PortalClose();
+            yield return new WaitForSeconds(portalSystem.portalOpenTime);
         }
         yield return null;
     }
@@ -70,6 +83,7 @@ public class WalkerManager : MonoSingleton<WalkerManager>
     private void WalkerStatPlacement(GameObject obj, WalkerID walkerID, int ID, int health)
     {
         Walker.Add(obj);
+        walkerID.animController.CallRunAnim();
         walkerID.CharacterBar.StartCameraLook();
         walkerID.StartWalkerID(ID, health);
         StartNewRunner(obj, walkerID);

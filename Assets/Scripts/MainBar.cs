@@ -66,10 +66,16 @@ public class MainBar : MonoSingleton<MainBar>
         {
             Buttons.Instance.SettingPanelOff();
             MarketSystem.Instance.GameFinish();
+            WalkerDanceTime();
             foreach (MainManager.AllGuns item in MainManager.Instance.allGuns)
                 ParticalSystem.Instance.CallGunCrashPartical(item.Guns[0].gameObject);
             GameManager.Instance.gameStat = GameManager.GameStat.finish;
             Buttons.Instance.failPanel.SetActive(true);
         }
+    }
+    private void WalkerDanceTime()
+    {
+        foreach (GameObject item in WalkerManager.Instance.Walker)
+            item.GetComponent<AnimController>().CallDeadAnim();
     }
 }

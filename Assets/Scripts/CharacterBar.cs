@@ -75,7 +75,7 @@ public class CharacterBar : MonoBehaviour
             ParticalSystem.Instance.CallWalkerDiePartical(gameObject);
             FinishSystem.Instance.FinishCheck();
             Vibration.Vibrate(30);
-            walkerManager.RemoveWalker(gameObject);
+            StartCoroutine(walkerManager.RemoveWalker(gameObject, walkerID));
         }
     }
 }
