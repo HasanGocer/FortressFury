@@ -13,7 +13,8 @@ public class ParticalSystem : MonoSingleton<ParticalSystem>
     [SerializeField] int _OPGunCrashFirstParticalCount;
     [SerializeField] int _OPGunCrashSecondParticalCount;
     [SerializeField] int _OPNewObjectParticalCount;
-    [SerializeField] int _walkerHitCastleParticalTime, _walkerDieParticalTime, _hitParticalTime, _gunCrashWaitTime, _newObjectTime;
+    [SerializeField] int _OPHitFinishParticalCount;
+    [SerializeField] int _walkerHitCastleParticalTime, _walkerDieParticalTime, _hitParticalTime, _gunCrashWaitTime, _newObjectTime, _hitFinishTime;
     [SerializeField] float _walkerDieDistance;
     [SerializeField] GameObject newObjectParticalPos;
 
@@ -37,7 +38,10 @@ public class ParticalSystem : MonoSingleton<ParticalSystem>
     {
         StartCoroutine(CallNewObjectParticalEnum());
     }
-
+    public void CallHitFinishPartical(GameObject pos)
+    {
+        StartCoroutine(CallHitFinishParticalEnum(pos));
+    }
 
     private IEnumerator CallWalkerDieParticalEnum(GameObject pos)
     {
@@ -68,6 +72,13 @@ public class ParticalSystem : MonoSingleton<ParticalSystem>
         partical.transform.position = newObjectParticalPos.transform.position;
         yield return new WaitForSeconds(_newObjectTime);
         ObjectPool.Instance.AddObject(_OPNewObjectParticalCount, partical);
+    }
+    private IEnumerator CallHitFinishParticalEnum(GameObject pos)
+    {
+        GameObject partical = ObjectPool.Instance.GetPooledObject(_OPHitFinishParticalCount);
+        partical.transform.position = pos.transform.position;
+        yield return new WaitForSeconds(_hitFinishTime);
+        ObjectPool.Instance.AddObject(_OPHitFinishParticalCount, partical);
     }
     private IEnumerator CallCrashGunEnum(GameObject pos)
     {

@@ -12,7 +12,7 @@ public class WalkerTouch : MonoBehaviour
         if (other.CompareTag("Hit"))
         {
             ItemData itemData = ItemData.Instance;
-            print(1);
+            ParticalSystem.Instance.CallHitFinishPartical(other.gameObject);
             GunFire.Instance.BackAddedHit(other.gameObject);
             HealtDown(itemData);
             PointText.Instance.CallDamageText(gameObject, itemData.field.gunAtackPower);
@@ -22,7 +22,7 @@ public class WalkerTouch : MonoBehaviour
         {
             walkerID.isLive = false;
             walkerID.capsuleCollider.enabled = false;
-            print(31);
+            print("tuch");
             ItemData itemData = ItemData.Instance;
 
             FinishSystem.Instance.FinishCheck();

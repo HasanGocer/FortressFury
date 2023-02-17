@@ -85,7 +85,7 @@ public class GunFire : MonoSingleton<GunFire>
             HitPlacement(ref hit, pos);
             GunEffect(hit, focusRival);
             GunLookFocusRival(focusRival, mainManager, gunCount);
-            GunShake(mainManager, itemData, gunCount);
+            StartCoroutine(GunShake(mainManager, itemData, gunCount));
             StartCoroutine(HitMove(hit, focusRival));
         }
     }
@@ -109,7 +109,7 @@ public class GunFire : MonoSingleton<GunFire>
     }
     private IEnumerator GunShake(MainManager mainManager, ItemData itemData, int gunCount)
     {
-        mainManager.allGuns[gunCount].Guns[mainManager.gunCount].transform.DOShakeScale(itemData.field.gunReloadTime, _gunScalePower);
+        mainManager.allGuns[gunCount].Guns[mainManager.gunCount].transform.DOShakeScale(((itemData.field.gunReloadTime) / 3) * 2, _gunScalePower);
         yield return new WaitForSeconds(itemData.field.gunReloadTime);
         mainManager.allGuns[gunCount].Guns[mainManager.gunCount].transform.localScale = new Vector3(_gunScale, _gunScale, _gunScale);
     }

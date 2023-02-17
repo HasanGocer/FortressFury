@@ -123,6 +123,7 @@ public class Buttons : MonoSingleton<Buttons>
         GameManager.Instance.gameStat = GameManager.GameStat.start;
         startPanel.SetActive(false);
 
+        ParticalSystem.Instance.CallNewObjectPartical();
         StartCoroutine(PortalSystem.Instance.PortalFirstOpen());
     }
     private IEnumerator WinButton()

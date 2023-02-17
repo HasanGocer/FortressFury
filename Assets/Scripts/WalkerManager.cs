@@ -27,9 +27,10 @@ public class WalkerManager : MonoSingleton<WalkerManager>
         ItemData itemData = ItemData.Instance;
         PortalSystem portalSystem = PortalSystem.Instance;
 
+        StartCoroutine(StartWalkerWalk(itemData.field.walkerCount, itemData, portalSystem));
+
         if (GameManager.Instance.level % 10 != 0)
         {
-            StartCoroutine(StartWalkerWalk(itemData.field.walkerCount, itemData, portalSystem));
         }
         else
         {
