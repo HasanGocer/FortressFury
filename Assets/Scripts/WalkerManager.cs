@@ -41,8 +41,8 @@ public class WalkerManager : MonoSingleton<WalkerManager>
     public IEnumerator RemoveWalker(GameObject walker, WalkerID walkerID)
     {
         walkerID.animController.CallDeadAnim();
-        yield return new WaitForSeconds(_deadTime);
         Walker.Remove(walker);
+        yield return new WaitForSeconds(_deadTime);
         ObjectPool.Instance.AddObject(_OPRunnerCount + walker.GetComponent<WalkerID>().ID, walker);
     }
 

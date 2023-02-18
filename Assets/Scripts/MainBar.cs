@@ -26,8 +26,9 @@ public class MainBar : MonoSingleton<MainBar>
         float nowBar = (float)count / (float)max;
         float afterBar = ((float)count - (float)down) / (float)max;
         if (afterBar < 0) afterBar = 0;
-        MainManager.Instance.mainHealth -= ItemData.Instance.field.walkerCastleHitPower;
+        MainManager.Instance.mainHealth -= down;
         StartCoroutine(BarUpdateIenumurator(nowBar, afterBar));
+        print(31);
     }
 
     private IEnumerator LookCamera()
