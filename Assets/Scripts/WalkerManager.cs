@@ -38,6 +38,11 @@ public class WalkerManager : MonoSingleton<WalkerManager>
         }
     }
 
+    public GameObject GetObject(int ID)
+    {
+        return ObjectPool.Instance.GetPooledObject(_OPRunnerCount + ID);
+    }
+
     public IEnumerator RemoveWalker(GameObject walker, WalkerID walkerID)
     {
         walkerID.animController.CallDeadAnim();
@@ -49,11 +54,15 @@ public class WalkerManager : MonoSingleton<WalkerManager>
     private IEnumerator StartWalkerWalk(int walkerCount, ItemData itemData, PortalSystem portalSystem)
     {
         for (int i1 = itemData.field.walkerTypeCount; i1 >= 0; i1--)
+        {
             for (int i2 = 0; i2 < walkerCount + (levelModRunnerPlusCount * i1); i2++)
             {
                 this.walkerCount++;
                 yield return null;
             }
+            if (i1 != 0) this.walkerCount += HelicopterSystem.Instance.helicopterCount;
+        }
+
 
         for (int i1 = itemData.field.walkerTypeCount; i1 >= 0; i1--)
         {
@@ -72,16 +81,14 @@ public class WalkerManager : MonoSingleton<WalkerManager>
                 yield return new WaitForSeconds(_spawnCoundownTime);
             }
 
+            StartCoroutine(HelicopterSystem.Instance.HelicopterSystemStart(i1));
+
             portalSystem.PortalClose();
             yield return new WaitForSeconds(portalSystem.portalOpenTime);
         }
         yield return null;
     }
-    private GameObject GetObject(int ID)
-    {
-        return ObjectPool.Instance.GetPooledObject(_OPRunnerCount + ID);
-    }
-    private void WalkerStatPlacement(GameObject obj, WalkerID walkerID, int ID, int health)
+    public void WalkerStatPlacement(GameObject obj, WalkerID walkerID, int ID, int health)
     {
         Walker.Add(obj);
         walkerID.animController.CallRunAnim();

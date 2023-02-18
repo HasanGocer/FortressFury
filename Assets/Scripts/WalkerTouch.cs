@@ -18,11 +18,13 @@ public class WalkerTouch : MonoBehaviour
             PointText.Instance.CallDamageText(gameObject, itemData.field.gunAtackPower);
             walkerID.CharacterBar.BarUpdate(itemData.field.walkerHealth, walkerID.healthCount, itemData.field.gunAtackPower, MainManager.Instance.castle);
         }
-        if (other.CompareTag("Castle"))
+        if (other.CompareTag("Castle") && walkerID.isLive)
         {
             print("tuch");
+
             walkerID.isLive = false;
             walkerID.capsuleCollider.enabled = false;
+
             ItemData itemData = ItemData.Instance;
 
             FinishSystem.Instance.FinishCheck();
