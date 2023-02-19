@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.28502658, g: 0.37139305, b: 0.49600944, a: 1}
+  m_IndirectSpecularColor: {r: 0.28502697, g: 0.37139347, b: 0.49601266, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -778,7 +778,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.0000076789, y: 247.78}
+  m_AnchoredPosition: {x: -0.0000076789, y: 247.77979}
   m_SizeDelta: {x: 501.57, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &74410042
@@ -55286,46 +55286,67 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pools:
   - objectPrefab: {fileID: 9042420963200867371, guid: 254c34400c65a264da741c4b3def46e5, type: 3}
+    objectParent: {fileID: 0}
     poolSize: 200
   - objectPrefab: {fileID: 4091896049231155831, guid: b458fa4fb81e0934583e8689b7e7ea6e, type: 3}
+    objectParent: {fileID: 0}
     poolSize: 200
   - objectPrefab: {fileID: 4804167927645684884, guid: b09aee856024c2a4e9ca0981c9a07142, type: 3}
+    objectParent: {fileID: 0}
     poolSize: 200
   - objectPrefab: {fileID: 153256, guid: fe394d041df1a0547990f49cf653249f, type: 3}
+    objectParent: {fileID: 0}
     poolSize: 300
   - objectPrefab: {fileID: 132352, guid: 71b02155078e4bf4e962f302d3675af2, type: 3}
+    objectParent: {fileID: 0}
     poolSize: 300
   - objectPrefab: {fileID: 1416843826977054, guid: 20f6e929a1aba9a4691c344f454ab272, type: 3}
+    objectParent: {fileID: 0}
     poolSize: 300
   - objectPrefab: {fileID: 130332, guid: 2e30d40b54f77704d815fabce00d7b2e, type: 3}
+    objectParent: {fileID: 0}
     poolSize: 300
   - objectPrefab: {fileID: 1345027383935582, guid: 508c9f007a2bf724d88361f16953bbac, type: 3}
+    objectParent: {fileID: 0}
     poolSize: 300
   - objectPrefab: {fileID: 1497030318103322, guid: 3313c584bfb0ca54584fe5b29871dfc2, type: 3}
+    objectParent: {fileID: 0}
     poolSize: 300
   - objectPrefab: {fileID: 132352, guid: 71b02155078e4bf4e962f302d3675af2, type: 3}
+    objectParent: {fileID: 0}
     poolSize: 300
   - objectPrefab: {fileID: 9113979039440518663, guid: 4df0c686f61a6cf47a9c2b9e09d74b34, type: 3}
+    objectParent: {fileID: 0}
     poolSize: 300
   - objectPrefab: {fileID: 5335385920833346368, guid: 6025ebb9179472741b01378f789cd706, type: 3}
+    objectParent: {fileID: 0}
     poolSize: 300
   - objectPrefab: {fileID: 5789139584517132691, guid: 1bf44bc08cd8aa946bf902ec8cbf6e0a, type: 3}
+    objectParent: {fileID: 0}
     poolSize: 300
   - objectPrefab: {fileID: 5901677798901233307, guid: 9aa952043e4c0a244a3a0f1151e639a6, type: 3}
+    objectParent: {fileID: 0}
     poolSize: 300
   - objectPrefab: {fileID: 119216, guid: e85f4a610ef9e5b4aa9cedce76136489, type: 3}
+    objectParent: {fileID: 0}
     poolSize: 300
   - objectPrefab: {fileID: 146404, guid: 41fc6e40715949e47aa61f8001df94fe, type: 3}
+    objectParent: {fileID: 0}
     poolSize: 300
   - objectPrefab: {fileID: 110446, guid: f6322404d6e3b914aa01ac044fb9415e, type: 3}
+    objectParent: {fileID: 0}
     poolSize: 300
   - objectPrefab: {fileID: 151808, guid: 5d6f0dd615584fe4a813ab93edc17b31, type: 3}
+    objectParent: {fileID: 0}
     poolSize: 300
   - objectPrefab: {fileID: 108410, guid: 31f9fcfbbcecdd24caf0eb7857420dcd, type: 3}
+    objectParent: {fileID: 0}
     poolSize: 300
   - objectPrefab: {fileID: 135046, guid: a10a669b5e36f134781f319ffcf0bb4a, type: 3}
+    objectParent: {fileID: 0}
     poolSize: 300
   - objectPrefab: {fileID: 171482, guid: 5bc71fb5e90182941b584e88079e3ec5, type: 3}
+    objectParent: {fileID: 0}
     poolSize: 300
 --- !u!114 &1311142908
 MonoBehaviour:
@@ -55446,7 +55467,7 @@ MonoBehaviour:
   gameStat: 0
   addedMoney: 0
   level: 1
-  money: 200
+  money: 50
   vibration: 1
   sound: 1
 --- !u!114 &1311142912
