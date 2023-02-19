@@ -964,7 +964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 1903803568698433873}
-  run: {fileID: 7400000, guid: bbd7a61080994524dbc07d455284b276, type: 2}
+  run: {fileID: 7400000, guid: 01c519af90825a64f90dd51ae74ab0d7, type: 2}
   dance: {fileID: -203655887218126122, guid: abbdfef8382d38f4ebdb21a86ec7fb43, type: 3}
   dead: {fileID: -203655887218126122, guid: 39456ae2cf0a4b047a3169800f611818, type: 3}
 --- !u!114 &3182413107355924
