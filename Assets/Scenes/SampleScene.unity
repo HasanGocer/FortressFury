@@ -55430,7 +55430,7 @@ MonoBehaviour:
     walkerCastleHitPower: 100
     walkerCount: 200
     walkerTypeCount: 200
-    gunReloadTime: 300
+    gunReloadTime: 100
 --- !u!114 &1311142911
 MonoBehaviour:
   m_ObjectHideFlags: 0
