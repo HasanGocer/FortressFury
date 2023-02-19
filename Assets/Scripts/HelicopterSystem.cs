@@ -33,7 +33,7 @@ public class HelicopterSystem : MonoSingleton<HelicopterSystem>
         yield return new WaitForSeconds(_stringDownTime);
         walker.transform.SetParent(null);
         mainString.transform.DOMove(new Vector3(mainString.transform.position.x, mainString.transform.position.y + _stringDownDistance, mainString.transform.position.z), _stringDownTime);
-        WalkerManager.Instance.WalkerStatPlacement(walker, walker.GetComponent<WalkerID>(), ID, ItemData.Instance.field.walkerHealth);
+        WalkerManager.Instance.WalkerStatPlacement(walker, walker.GetComponent<WalkerID>(), ID, ItemData.Instance.field.walkerHealth, true);
     }
 
 }

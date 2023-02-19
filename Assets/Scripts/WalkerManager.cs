@@ -77,28 +77,31 @@ public class WalkerManager : MonoSingleton<WalkerManager>
                 GameObject obj = GetObject(i1);
                 WalkerID walkerID = obj.GetComponent<WalkerID>();
 
-                WalkerStatPlacement(obj, walkerID, i1, itemData.field.walkerHealth - (i1 * itemData.constant.walkerHealth));
+                WalkerStatPlacement(obj, walkerID, i1, itemData.field.walkerHealth - (i1 * itemData.constant.walkerHealth), false);
                 yield return new WaitForSeconds(_spawnCoundownTime);
             }
 
-            StartCoroutine(HelicopterSystem.Instance.HelicopterSystemStart(i1));
+
+            if (i1 != 0)
+                StartCoroutine(HelicopterSystem.Instance.HelicopterSystemStart(i1));
 
             portalSystem.PortalClose();
             yield return new WaitForSeconds(portalSystem.portalOpenTime);
         }
         yield return null;
     }
-    public void WalkerStatPlacement(GameObject obj, WalkerID walkerID, int ID, int health)
+    public void WalkerStatPlacement(GameObject obj, WalkerID walkerID, int ID, int health, bool isHelicopter)
     {
         Walker.Add(obj);
         walkerID.animController.CallRunAnim();
         walkerID.CharacterBar.StartCameraLook();
         walkerID.StartWalkerID(ID, health);
-        StartNewRunner(obj, walkerID);
+        StartNewRunner(obj, walkerID, isHelicopter);
     }
-    private void StartNewRunner(GameObject walker, WalkerID walkerID)
+    private void StartNewRunner(GameObject walker, WalkerID walkerID, bool isHelicopter)
     {
-        WalkerPlacement(ref walker, _walkerStartPos);
+        if (!isHelicopter)
+            WalkerPlacement(ref walker, _walkerStartPos);
         StartCoroutine(WalkPart(walker, _walkerFinishPos, _speedFactor, walkerID, _maxWalkerDisance));
     }
     private void WalkerPlacement(ref GameObject walker, GameObject pos)

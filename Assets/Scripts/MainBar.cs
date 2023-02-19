@@ -77,6 +77,6 @@ public class MainBar : MonoSingleton<MainBar>
     private void WalkerDanceTime()
     {
         foreach (GameObject item in WalkerManager.Instance.Walker)
-            item.GetComponent<AnimController>().CallDeadAnim();
+            item.GetComponent<AnimController>().CallDanceAnim();
     }
 }
