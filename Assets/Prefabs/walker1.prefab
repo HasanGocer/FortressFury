@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 9113979040838295845}
-  run: {fileID: 7400000, guid: 606a2606419c41d4b80d6ccb3de2f0b4, type: 2}
+  run: {fileID: 7400000, guid: 5e3f41ea69320eb4184ae40751561749, type: 2}
   dance: {fileID: -203655887218126122, guid: abbdfef8382d38f4ebdb21a86ec7fb43, type: 3}
   dead: {fileID: -203655887218126122, guid: 39456ae2cf0a4b047a3169800f611818, type: 3}
 --- !u!114 &9113979039440518650
