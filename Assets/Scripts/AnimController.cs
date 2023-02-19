@@ -6,8 +6,12 @@ using Animancer;
 public class AnimController : MonoBehaviour
 {
     [SerializeField] private AnimancerComponent character;
-    [SerializeField] private AnimationClip run, dance, dead;
+    [SerializeField] private AnimationClip run, dance, dead, down;
 
+    public void calLDownAnim()
+    {
+        character.Play(down, 0.2f);
+    }
     public void CallRunAnim()
     {
         character.Play(run, 0.2f);

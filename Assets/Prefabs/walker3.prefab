@@ -941,7 +941,7 @@ Transform:
   m_GameObject: {fileID: 5789139584517132691}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.7, y: 2.7, z: 2.7}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7200961846489415111}
@@ -967,6 +967,7 @@ MonoBehaviour:
   run: {fileID: 7400000, guid: 01c519af90825a64f90dd51ae74ab0d7, type: 2}
   dance: {fileID: -203655887218126122, guid: abbdfef8382d38f4ebdb21a86ec7fb43, type: 3}
   dead: {fileID: -203655887218126122, guid: 39456ae2cf0a4b047a3169800f611818, type: 3}
+  down: {fileID: -203655887218126122, guid: caa412d5287c85d4e8197ba662c0feb3, type: 3}
 --- !u!114 &3182413107355924
 MonoBehaviour:
   m_ObjectHideFlags: 0
