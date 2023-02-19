@@ -12965,7 +12965,7 @@ Transform:
   - {fileID: 1235076683}
   - {fileID: 528865650}
   m_Father: {fileID: 1615954470}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &478838928
 GameObject:
@@ -24131,7 +24131,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1615954470}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &671332616
 GameObject:
@@ -39722,7 +39722,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1615954470}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &876322704
 MonoBehaviour:
@@ -56893,7 +56893,7 @@ Transform:
   - {fileID: 2072863485}
   - {fileID: 106158394}
   m_Father: {fileID: 1615954470}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1358543648
 PrefabInstance:
@@ -74097,6 +74097,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1687258585}
   - {fileID: 470457401}
   - {fileID: 6399296221286337662}
   - {fileID: 1335126775}
@@ -74578,7 +74579,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 84.40955
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -74604,13 +74605,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.007756482, y: 3.2126396, z: -3.1453178}
-  m_LocalScale: {x: 0.83333325, y: 0.83333325, z: 0.83333325}
+  m_LocalPosition: {x: -0.45, y: 12.3, z: -35.22}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 298555487}
-  m_Father: {fileID: 990453105699504062}
-  m_RootOrder: 3
+  m_Father: {fileID: 1615954470}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1687258586
 MonoBehaviour:
@@ -102195,7 +102196,6 @@ Transform:
   - {fileID: 990478960458901900}
   - {fileID: 981792252201937604}
   - {fileID: 1487986307}
-  - {fileID: 1687258585}
   m_Father: {fileID: 695097684}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -147360,7 +147360,7 @@ RectTransform:
   - {fileID: 5817084773851138895}
   - {fileID: 602160092}
   m_Father: {fileID: 1615954470}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
