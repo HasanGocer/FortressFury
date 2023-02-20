@@ -5,6 +5,11 @@ using DG.Tweening;
 
 public class HelicopterSystem : MonoSingleton<HelicopterSystem>
 {
+    public class StringPos
+    {
+        public List<GameObject> _StringsPos = new List<GameObject>();
+    }
+
     [Header("Finish_Field")]
     [Space(10)]
 
@@ -12,16 +17,16 @@ public class HelicopterSystem : MonoSingleton<HelicopterSystem>
     [SerializeField] float _spawnDelayTime, _stringDownTime;
     [SerializeField] float _stringDownDistance;
     [SerializeField] List<GameObject> _Strings = new List<GameObject>();
-    [SerializeField] List<GameObject> _StringsPos = new List<GameObject>();
-
+    [SerializeField] List<StringPos> _StringPos = new List<StringPos>();
 
     public IEnumerator HelicopterSystemStart(int ID)
     {
-        for (int i = 0; i < _Strings.Count; i++)
-        {
-            StartCoroutine(HelicopterTimeEnum(ID, _Strings[i], _StringsPos[i]));
-            yield return new WaitForSeconds(_spawnDelayTime);
-        }
+        for (int i1 = 0; i1 < _Strings.Count; i1++)
+            for (int i2 = 0; i2 < _StringPos[i1]._StringsPos.Count; i2++)
+            {
+                StartCoroutine(HelicopterTimeEnum(ID, _Strings[i1], _StringPos[i1]._StringsPos[i2]));
+                yield return new WaitForSeconds(_spawnDelayTime);
+            }
     }
 
     private IEnumerator HelicopterTimeEnum(int ID, GameObject mainString, GameObject mainSpawnPos)

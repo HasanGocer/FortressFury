@@ -5,6 +5,7 @@ using UnityEngine;
 public class CoinSpawn : MonoSingleton<CoinSpawn>
 {
     [SerializeField] private int _OPCoinCount;
+    public GameObject finishPos;
 
     public void Spawn(GameObject pos, GameObject finishPos)
     {
@@ -23,7 +24,7 @@ public class CoinSpawn : MonoSingleton<CoinSpawn>
             Rigidbody rb = obj.GetComponent<Rigidbody>();
 
             obj.transform.position = pos.transform.position;
-            obj.transform.position += new Vector3(0, 6, 0);
+            obj.transform.position += new Vector3(0, 2, 0);
             rb.velocity = new Vector3(Random.Range(-3, 3), 0, Random.Range(-3, 3));
             rb.useGravity = true;
             coins.Add(obj);
@@ -43,9 +44,9 @@ public class CoinSpawn : MonoSingleton<CoinSpawn>
         while (true)
         {
             lerpCount += Time.deltaTime;
-            obj.transform.position = Vector3.Lerp(obj.transform.position, Finish.transform.position + new Vector3(0, 4, 0), lerpCount);
+            obj.transform.position = Vector3.Lerp(obj.transform.position, Finish.transform.position + new Vector3(0, 2, 0), lerpCount);
             yield return new WaitForSeconds(Time.deltaTime);
-            if (2 > Vector3.Distance(obj.transform.position, Finish.transform.position + new Vector3(0, 4, 0)))
+            if (2 > Vector3.Distance(obj.transform.position, Finish.transform.position + new Vector3(0, 2, 0)))
             {
                 SoundSystem.Instance.CallCoinSound();
                 ObjectPool.Instance.AddObject(_OPCoinCount, obj);

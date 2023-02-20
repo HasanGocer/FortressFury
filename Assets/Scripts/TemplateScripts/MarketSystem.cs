@@ -31,45 +31,16 @@ public class MarketSystem : MonoSingleton<MarketSystem>
 
     public RectTransform marketPanel;
 
-    [Header("Turret_Field")]
-    [Space(10)]
-
-    [SerializeField] GameObject _turretBuyPanel;
-    public int gun2, gun3;
-    [SerializeField] GameObject _gun2GO, _gun3GO;
-    [SerializeField] int _gunPrice;
-    [SerializeField] Button _gun2Button, _gun3Button;
-
     public void MarketStart()
     {
         TextPlacement();
         MarketButtonPlacement();
-        PlayerPrefPlacement();
     }
 
     public void GameStart()
     {
-        if (gun2 == 1 && gun3 == 1)
-        {
-            ButtonColorPlacement();
-            marketPanel.gameObject.SetActive(true);
-            _turretBuyPanel.SetActive(false);
-        }
-        else
-        {
-            marketPanel.gameObject.SetActive(false);
-            _turretBuyPanel.SetActive(true);
-            if (gun2 == 1)
-            {
-                _gun2Button.gameObject.SetActive(false);
-                _gun2GO.SetActive(true);
-            }
-            if (gun3 == 1)
-            {
-                _gun3Button.gameObject.SetActive(false);
-                _gun3GO.SetActive(true);
-            }
-        }
+        ButtonColorPlacement();
+        marketPanel.gameObject.SetActive(true);
     }
 
     public void ButtonColorPlacement()
@@ -101,52 +72,12 @@ public class MarketSystem : MonoSingleton<MarketSystem>
         marketPanel.gameObject.SetActive(false);
     }
 
-    public void PlayerPrefPlacement()
-    {
-        if (PlayerPrefs.HasKey("Gun2"))
-        {
-            gun2 = 1;
-            _gun2GO.SetActive(true);
-        }
-        if (PlayerPrefs.HasKey("Gun3"))
-        {
-            gun3 = 1;
-            _gun3GO.SetActive(true);
-        }
-    }
-
-    private void GunBuy(int i)
-    {
-        if (i == 2 && _gunPrice <= GameManager.Instance.money)
-        {
-            _gun2GO.SetActive(true);
-            ParticalSystem.Instance.CallNewObjectPartical();
-            MoneySystem.Instance.MoneyTextRevork(-1 * _gunPrice);
-            PlayerPrefs.SetInt("Gun2", 1);
-            gun2 = 1;
-            SoundSystem.Instance.CallUpgradeSound();
-            StartCoroutine(GunFire.Instance.GunFireStart(1));
-        }
-        if (i == 3 && _gunPrice <= GameManager.Instance.money)
-        {
-            _gun3GO.SetActive(true);
-            ParticalSystem.Instance.CallNewObjectPartical();
-            MoneySystem.Instance.MoneyTextRevork(-1 * _gunPrice);
-            PlayerPrefs.SetInt("Gun3", 1);
-            gun3 = 1;
-            SoundSystem.Instance.CallUpgradeSound();
-            StartCoroutine(GunFire.Instance.GunFireStart(2));
-        }
-        GameStart();
-    }
     private void MarketButtonPlacement()
     {
         marketMainField.PlayerImageButton[0].onClick.AddListener(() => FieldBuy(0));
         marketMainField.PlayerImageButton[1].onClick.AddListener(() => FieldBuy(1));
         marketMainField.PlayerImageButton[2].onClick.AddListener(() => FieldBuy(2));
         marketMainField.PlayerImageButton[3].onClick.AddListener(() => FieldBuy(3));
-        _gun2Button.onClick.AddListener(() => GunBuy(2));
-        _gun3Button.onClick.AddListener(() => GunBuy(3));
     }
     private void FieldBuy(int fieldCount)
     {

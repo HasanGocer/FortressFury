@@ -26,9 +26,9 @@ public class ParticalSystem : MonoSingleton<ParticalSystem>
     {
         StartCoroutine(CallWalkerDieParticalEnum(pos));
     }
-    public void CallHitPartical(GameObject pos, GameObject target)
+    public void CallHitPartical(GameObject pos)
     {
-        StartCoroutine(CallHitParticalEnum(pos, target));
+        StartCoroutine(CallHitParticalEnum(pos));
     }
     public void CallGunCrashPartical(GameObject pos)
     {
@@ -58,11 +58,10 @@ public class ParticalSystem : MonoSingleton<ParticalSystem>
         yield return new WaitForSeconds(_walkerHitCastleParticalTime);
         ObjectPool.Instance.AddObject(_OPWalkerHitParticalCount, partical);
     }
-    private IEnumerator CallHitParticalEnum(GameObject pos, GameObject target)
+    private IEnumerator CallHitParticalEnum(GameObject pos)
     {
         GameObject partical = ObjectPool.Instance.GetPooledObject(_OPHitParticalCount);
         partical.transform.position = pos.transform.position;
-        partical.transform.LookAt(target.transform);
         yield return new WaitForSeconds(_hitParticalTime);
         ObjectPool.Instance.AddObject(_OPHitParticalCount, partical);
     }

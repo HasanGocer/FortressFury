@@ -20,8 +20,6 @@ public class WalkerTouch : MonoBehaviour
         }
         if (other.CompareTag("Castle") && walkerID.isLive)
         {
-            print("tuch");
-
             walkerID.isLive = false;
             walkerID.capsuleCollider.enabled = false;
 

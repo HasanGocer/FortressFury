@@ -68,7 +68,7 @@ public class CharacterBar : MonoBehaviour
         {
             walkerID.isLive = false;
             int money = Random.Range(walkerManager.minPrice, walkerManager.maxPrice);
-            CoinSpawn.Instance.Spawn(gameObject, finishPos);
+            CoinSpawn.Instance.Spawn(gameObject, CoinSpawn.Instance.finishPos);
             MoneySystem.Instance.MoneyTextRevork(money);
             MarketSystem.Instance.ButtonColorPlacement();
             PointText.Instance.CallCoinText(gameObject, money);

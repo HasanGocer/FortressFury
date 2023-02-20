@@ -7,6 +7,7 @@ public class MainManager : MonoSingleton<MainManager>
     [System.Serializable]
     public class AllGuns
     {
+        public GameObject ParentGun;
         public List<GameObject> Guns = new List<GameObject>();
         public List<GunID> GunIDs = new List<GunID>();
     }
@@ -16,7 +17,7 @@ public class MainManager : MonoSingleton<MainManager>
 
 
 
-    public List<AllGuns> allGuns = new List<AllGuns>();
+    public AllGuns allGuns = new AllGuns();
     public int gunCount;
     public int mainHealth;
     public GameObject castle;
@@ -33,8 +34,7 @@ public class MainManager : MonoSingleton<MainManager>
         else
             PlayerPrefs.SetInt("gunCount", gunCount);
 
-        foreach (AllGuns item in allGuns)
-            item.Guns[gunCount].SetActive(true);
+        allGuns.Guns[gunCount].SetActive(true);
     }
 
     public void StartMainManager()

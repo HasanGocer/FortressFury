@@ -28,7 +28,6 @@ public class MainBar : MonoSingleton<MainBar>
         if (afterBar < 0) afterBar = 0;
         MainManager.Instance.mainHealth -= down;
         StartCoroutine(BarUpdateIenumurator(nowBar, afterBar));
-        print(31);
     }
 
     private IEnumerator LookCamera()
@@ -68,8 +67,7 @@ public class MainBar : MonoSingleton<MainBar>
             Buttons.Instance.SettingPanelOff();
             MarketSystem.Instance.GameFinish();
             WalkerDanceTime();
-            foreach (MainManager.AllGuns item in MainManager.Instance.allGuns)
-                ParticalSystem.Instance.CallGunCrashPartical(item.Guns[0].gameObject);
+            ParticalSystem.Instance.CallGunCrashPartical(MainManager.Instance.allGuns.Guns[MainManager.Instance.gunCount].gameObject);
             GameManager.Instance.gameStat = GameManager.GameStat.finish;
             Buttons.Instance.failPanel.SetActive(true);
         }
