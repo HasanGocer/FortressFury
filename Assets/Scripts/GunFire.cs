@@ -152,7 +152,7 @@ public class GunFire : MonoSingleton<GunFire>
     }
     private IEnumerator HitMoveRigidbody(GameObject hit)
     {
-        float xangle = MainManager.Instance.allGuns.ParentGun.transform.rotation.eulerAngles.y;
+        float xangle = MainManager.Instance.allGuns.ParentGun.transform.GetChild(MainManager.Instance.gunCount).transform.GetChild(0).transform.rotation.eulerAngles.y;
         if (xangle > 300) xangle -= 360;
         xangle /= 6;
         hit.GetComponent<Rigidbody>().velocity = new Vector3(xangle, 0, _hitVelocityPower);

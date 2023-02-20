@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public class HelicopterSystem : MonoSingleton<HelicopterSystem>
 {
+    [System.Serializable]
     public class StringPos
     {
         public List<GameObject> _StringsPos = new List<GameObject>();
@@ -22,28 +23,38 @@ public class HelicopterSystem : MonoSingleton<HelicopterSystem>
     public IEnumerator HelicopterSystemStart(int ID)
     {
         for (int i1 = 0; i1 < _Strings.Count; i1++)
-            for (int i2 = 0; i2 < _StringPos[i1]._StringsPos.Count; i2++)
-            {
-                StartCoroutine(HelicopterTimeEnum(ID, _Strings[i1], _StringPos[i1]._StringsPos[i2]));
-                yield return new WaitForSeconds(_spawnDelayTime);
-            }
+        {
+            StartCoroutine(HelicopterTimeEnum(ID, _Strings[i1], _StringPos[i1]._StringsPos));
+            yield return new WaitForSeconds(_spawnDelayTime);
+        }
+
     }
 
-    private IEnumerator HelicopterTimeEnum(int ID, GameObject mainString, GameObject mainSpawnPos)
+    private IEnumerator HelicopterTimeEnum(int ID, GameObject mainString, List<GameObject> mainSpawnPos)
     {
-        GameObject walker = WalkerManager.Instance.GetObject(ID);
-        WalkerID walkerID = walker.GetComponent<WalkerID>();
+        List<GameObject> walker = new List<GameObject>();
+        List<WalkerID> walkerID = new List<WalkerID>();
 
-        walker.transform.position = mainSpawnPos.transform.position;
-        walker.transform.SetParent(mainString.transform);
-        walkerID.animController.calLDownAnim();
+        for (int i = 0; i < mainSpawnPos.Count; i++)
+        {
+            walker.Add(WalkerManager.Instance.GetObject(ID));
+            walker[walker.Count - 1].transform.position = mainSpawnPos[i].transform.position;
+            walker[walker.Count - 1].transform.SetParent(mainString.transform);
+            walkerID.Add(walker[walker.Count - 1].GetComponent<WalkerID>());
+            walkerID[walkerID.Count - 1].animController.calLDownAnim();
+        }
+
+
 
         mainString.transform.DOMove(new Vector3(mainString.transform.position.x, mainString.transform.position.y - _stringDownDistance, mainString.transform.position.z), _stringDownTime);
         yield return new WaitForSeconds(_stringDownTime);
 
-        walker.transform.SetParent(null);
+        for (int i = 0; i < mainSpawnPos.Count; i++)
+            walker[i].transform.SetParent(null);
+
         mainString.transform.DOMove(new Vector3(mainString.transform.position.x, mainString.transform.position.y + _stringDownDistance, mainString.transform.position.z), _stringDownTime);
-        WalkerManager.Instance.WalkerStatPlacement(walker, walkerID, ID, ItemData.Instance.field.walkerHealth, true);
+        for (int i = 0; i < mainSpawnPos.Count; i++)
+            WalkerManager.Instance.WalkerStatPlacement(walker[i], walkerID[i], ID, ItemData.Instance.field.walkerHealth, true);
     }
 
 }

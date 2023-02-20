@@ -37,6 +37,14 @@ public class MainManager : MonoSingleton<MainManager>
         allGuns.Guns[gunCount].SetActive(true);
     }
 
+    public void BuyNewGun()
+    {
+        allGuns.Guns[gunCount].SetActive(false);
+        gunCount++;
+        PlayerPrefs.SetInt("gunCount", gunCount);
+        allGuns.Guns[gunCount].SetActive(true);
+    }
+
     public void StartMainManager()
     {
         mainHealth = ItemData.Instance.field.castleHealth;
