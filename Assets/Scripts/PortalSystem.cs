@@ -34,6 +34,11 @@ public class PortalSystem : MonoSingleton<PortalSystem>
     private void FirstPortalStart()
     {
         StartCoroutine(GunFire.Instance.ManuelGunStart());
+        if (MarketSystem.Instance.gun2 == 1)
+            StartCoroutine(GunFire.Instance.GunFireStart(1));
+        if (MarketSystem.Instance.gun3 == 1)
+            StartCoroutine(GunFire.Instance.GunFireStart(2));
+
         MainBar.Instance.MainBarStart();
         MarketSystem.Instance.GameStart();
         WalkerManager.Instance.FirstSpawn();

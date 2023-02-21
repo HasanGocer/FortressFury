@@ -17,9 +17,9 @@ public class GunFire : MonoSingleton<GunFire>
     [SerializeField] float _hitVelocityPower;
     Quaternion tempQuaternion;
 
-    public void BackAddedHit(GameObject hit)
+    public void BackAddedHit(GameObject hit, int ID)
     {
-        ObjectPool.Instance.AddObject(OPHitCount, hit);
+        ObjectPool.Instance.AddObject(OPHitCount + ID, hit);
     }
 
     public IEnumerator ManuelGunStart()
@@ -157,7 +157,7 @@ public class GunFire : MonoSingleton<GunFire>
         xangle /= 6;
         hit.GetComponent<Rigidbody>().velocity = new Vector3(xangle, 0, _hitVelocityPower);
         yield return new WaitForSeconds(_hitDistanceTime);
-        BackAddedHit(hit);
+        BackAddedHit(hit, MainManager.Instance.gunCount);
     }
     private IEnumerator HitMove(GameObject hit, GameObject pos)
     {

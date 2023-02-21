@@ -15,9 +15,7 @@ public class MainManager : MonoSingleton<MainManager>
     [Header("Main_Field")]
     [Space(10)]
 
-
-
-    public AllGuns allGuns = new AllGuns();
+    public List<AllGuns> allGuns = new List<AllGuns>();
     public int gunCount;
     public int mainHealth;
     public GameObject castle;
@@ -34,15 +32,16 @@ public class MainManager : MonoSingleton<MainManager>
         else
             PlayerPrefs.SetInt("gunCount", gunCount);
 
-        allGuns.Guns[gunCount].SetActive(true);
+        foreach (AllGuns item in allGuns)
+            item.Guns[gunCount].SetActive(true);
     }
 
-    public void BuyNewGun()
+    public void BuyNewGun(int i)
     {
-        allGuns.Guns[gunCount].SetActive(false);
+        allGuns[i].Guns[gunCount].SetActive(false);
         gunCount++;
         PlayerPrefs.SetInt("gunCount", gunCount);
-        allGuns.Guns[gunCount].SetActive(true);
+        allGuns[i].Guns[gunCount].SetActive(true);
     }
 
     public void StartMainManager()

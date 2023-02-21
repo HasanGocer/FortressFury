@@ -13,7 +13,7 @@ public class WalkerTouch : MonoBehaviour
         {
             ItemData itemData = ItemData.Instance;
             ParticalSystem.Instance.CallHitFinishPartical(other.gameObject);
-            GunFire.Instance.BackAddedHit(other.gameObject);
+            GunFire.Instance.BackAddedHit(other.gameObject, MainManager.Instance.gunCount);
             HealtDown(itemData);
             PointText.Instance.CallDamageText(gameObject, itemData.field.gunAtackPower);
             walkerID.CharacterBar.BarUpdate(itemData.field.walkerHealth, walkerID.healthCount, itemData.field.gunAtackPower, MainManager.Instance.castle);

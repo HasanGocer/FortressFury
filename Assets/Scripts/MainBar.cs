@@ -67,7 +67,7 @@ public class MainBar : MonoSingleton<MainBar>
             Buttons.Instance.SettingPanelOff();
             MarketSystem.Instance.GameFinish();
             WalkerDanceTime();
-            ParticalSystem.Instance.CallGunCrashPartical(MainManager.Instance.allGuns.Guns[MainManager.Instance.gunCount].gameObject);
+            ParticalSystem.Instance.CallGunCrashPartical(MainManager.Instance.allGuns[0].Guns[MainManager.Instance.gunCount].gameObject);
             GameManager.Instance.gameStat = GameManager.GameStat.finish;
             Buttons.Instance.failPanel.SetActive(true);
         }
