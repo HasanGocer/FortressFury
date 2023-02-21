@@ -24,6 +24,7 @@ public class FinishSystem : MonoSingleton<FinishSystem>
             StartCoroutine(BarSystem.Instance.BarImageFillAmountIenum());
         else
             buttons.NotBossFinal();
+        RotateOnTouch.Instance.target.gameObject.SetActive(false);
         SoundSystem.Instance.CallFinishSound();
         Buttons.Instance.SettingPanelOff();
         ParticalSystem.Instance.CallNewObjectPartical();

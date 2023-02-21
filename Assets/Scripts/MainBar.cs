@@ -64,6 +64,7 @@ public class MainBar : MonoSingleton<MainBar>
     {
         if (GameManager.Instance.gameStat == GameManager.GameStat.start)
         {
+            RotateOnTouch.Instance.target.gameObject.SetActive(false);
             Buttons.Instance.SettingPanelOff();
             MarketSystem.Instance.GameFinish();
             WalkerDanceTime();
