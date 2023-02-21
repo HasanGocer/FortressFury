@@ -36,11 +36,15 @@ public class MainManager : MonoSingleton<MainManager>
             item.Guns[gunCount].SetActive(true);
     }
 
-    public void BuyNewGun(int i)
+    public void BuyPlayerPref()
     {
-        allGuns[i].Guns[gunCount].SetActive(false);
         gunCount++;
         PlayerPrefs.SetInt("gunCount", gunCount);
+    }
+
+    public void BuyNewGun(int i)
+    {
+        allGuns[i].Guns[gunCount - 1].SetActive(false);
         allGuns[i].Guns[gunCount].SetActive(true);
     }
 

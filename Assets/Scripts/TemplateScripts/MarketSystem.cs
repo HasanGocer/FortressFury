@@ -117,6 +117,7 @@ public class MarketSystem : MonoSingleton<MarketSystem>
                     itemData.SetGunDistance();
                     SoundSystem.Instance.CallUpgradeSound();
                     ParticalSystem.Instance.CallNewObjectPartical();
+                    MainManager.Instance.BuyPlayerPref();
                     for (int i = 0; i < MainManager.Instance.allGuns.Count; i++)
                         MainManager.Instance.BuyNewGun(i);
                     marketMainField.MarketMainFieldPrice[2].text = moneySystem.NumberTextRevork(itemData.fieldPrice.gunDistance);
