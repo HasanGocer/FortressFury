@@ -39,6 +39,7 @@ public class PortalSystem : MonoSingleton<PortalSystem>
         if (MarketSystem.Instance.gun3 == 1)
             StartCoroutine(GunFire.Instance.GunFireStart(2));
 
+        RotateOnTouch.Instance.target.gameObject.SetActive(true);
         MainBar.Instance.MainBarStart();
         MarketSystem.Instance.GameStart();
         WalkerManager.Instance.FirstSpawn();

@@ -1,28 +1,20 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RotateOnTouch : MonoSingleton<RotateOnTouch>
 {
-    // Döndürülecek obje
     public GameObject objectToRotate;
 
-    // Dokunmanýn baþlangýç konumu
     private Vector2 initialTouchPosition;
-
-    // Dokunmanýn son konumu
     private Vector2 lastTouchPosition;
 
-    // Minimum hareket mesafesi (dokunma iþleminin baþlamasý için)
     public float minimumMovement = 10.0f;
-
-    // Döndürme hýzý
     public float rotationSpeed = 5.0f;
-
-    // Dokunma iþlemi sýrasýnda objenin dönüp dönmemesi
     public bool canRotate = false;
-
-    // Sýnýrlar
     public float leftLimit = -10.0f;
     public float rightLimit = 10.0f;
+
+    public Image target;
 
     void Update()
     {
@@ -48,6 +40,7 @@ public class RotateOnTouch : MonoSingleton<RotateOnTouch>
                         if (movementDistance < minimumMovement)
                             return;
 
+                        target.rectTransform.position = new Vector2(touch.position.x, (Camera.main.pixelHeight / 2) - 50);
                         float direction = Mathf.Sign(touch.position.x - lastTouchPosition.x);
 
                         float rotationAngle = direction * rotationSpeed * Time.deltaTime;
